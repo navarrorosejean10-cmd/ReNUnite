@@ -1,0 +1,10 @@
+<resources>
+    <style name="Theme.ReNUnite" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">#5B9AFF</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.ReNUnite.Splash" parent="Theme.ReNUnite">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>
