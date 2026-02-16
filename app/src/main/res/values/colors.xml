@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Branding Colors -->
+    <color name="brand_primary">#4361B5</color>
+    <color name="brand_primary_light">#6A7DC8</color>
+    <color name="brand_blue">#4361B5</color>
+    <color name="brand_blue_dark">#324A8A</color>
+    <color name="brand_blue_accent">#6A9EF8</color>
+    <color name="background_light">#F8FAFF</color>
+    <color name="background_dark">#212121</color>
+    <color name="surface_dark">#333333</color>
+    <color name="text_primary_light">#1E293B</color>
+    <color name="text_secondary_light">#64748B</color>
+    <color name="text_primary_dark">#E0E0E0</color>
+    <color name="text_secondary_dark">#9E9E9E</color>
+    <color name="tab_unselected">#94A3B8</color>
+    <color name="text_muted">#64748B</color>
+    <color name="light_blue_50">#E1F5FE</color>
+
+    <!-- Status Colors -->
+    <color name="status_pending_bg">#FFF8E1</color>
+    <color name="status_pending_text">#F57F17</color>
+    <color name="status_matching_bg">#E3F2FD</color>
+    <color name="status_matching_text">#1565C0</color>
+    <color name="status_verified_bg">#E8F5E9</color>
+    <color name="status_verified_text">#2E7D32</color>
+
+    <!-- UI Interaction Colors -->
+    <color name="gray_hover">#F1F5F9</color>
+
+    <!-- Dark Mode Specifics -->
+    <color name="dark_purple">#BB86FC</color>
 </resources>

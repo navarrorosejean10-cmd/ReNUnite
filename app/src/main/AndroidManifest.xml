@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".ReNUniteApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -11,6 +12,54 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ReNUnite">
+        <activity
+            android:name="com.example.renunite.PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.HelpCenterActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.AppSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.SecurityPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.MyReportDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.ArchiveActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.MyReportsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.MessagesActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.NotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.ItemConfirmationActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.AppointmentConfirmedActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.ScheduleAppointmentActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.ClaimRequestActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.ItemDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.SmartMatchActivity"
+            android:exported="false" />
         <activity
             android:name="com.example.renunite.ReportFoundActivity"
             android:exported="false" />
