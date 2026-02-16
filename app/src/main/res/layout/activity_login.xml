@@ -9,189 +9,194 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="32dp">
+            android:paddingHorizontal="32dp"
+            android:paddingBottom="48dp">
 
+            <!-- Logo Illustration -->
             <ImageView
                 android:id="@+id/ivLogo"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="24dp"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_marginTop="80dp"
                 android:src="@drawable/renunite_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvAppName"
+            <!-- App Name Text Asset -->
+            <ImageView
+                android:id="@+id/ivAppNameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="ReNUnite"
-                android:textColor="#FFFFFF"
-                android:textSize="38sp"
-                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/renunite_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ivLogo" />
 
-            <TextView
-                android:id="@+id/tvSubtitle"
+            <!-- Tagline Text Asset -->
+            <ImageView
+                android:id="@+id/ivTagline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Reuniting Lost Items at NU Dasmariñas"
-                android:textColor="#B3FFFFFF"
-                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/renunite_tagline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvAppName" />
+                app:layout_constraintTop_toBottomOf="@id/ivAppNameText" />
 
             <LinearLayout
                 android:id="@+id/inputContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="48dp"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
+                app:layout_constraintTop_toBottomOf="@id/ivTagline">
 
-                <!-- Email Input -->
-                <LinearLayout
+                <!-- Email Input Field -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
-                    android:background="@drawable/input_field_bg"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="4dp">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_email"
-                        app:tint="#5577AA" />
-
-                    <EditText
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:hint="Email or Username"
-                        android:inputType="textEmailAddress"
-                        android:textColor="#5577AA"
-                        android:textColorHint="#99AABB"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="20dp">
 
-                <!-- Password Input -->
-                <LinearLayout
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_email"
+                            app:tint="#A0C0F0" />
+
+                        <EditText
+                            android:id="@+id/etEmail"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:hint="Email or Username"
+                            android:inputType="textEmailAddress"
+                            android:textColor="#6688BB"
+                            android:textColorHint="#A0B0C0"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Password Input Field -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/input_field_bg"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="4dp">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_lock"
-                        app:tint="#5577AA" />
-
-                    <EditText
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:hint="Password"
-                        android:inputType="textPassword"
-                        android:textColor="#5577AA"
-                        android:textColorHint="#99AABB"
-                        android:textSize="16sp" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="20dp">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_visibility"
-                        app:tint="#5577AA" />
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_lock"
+                            app:tint="#A0C0F0" />
+
+                        <EditText
+                            android:id="@+id/etPassword"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:hint="Password"
+                            android:inputType="textPassword"
+                            android:textColor="#6688BB"
+                            android:textColorHint="#A0B0C0"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:id="@+id/ivTogglePassword"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_visibility"
+                            app:tint="#A0C0F0" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/tvForgotPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="12dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="12dp"
                     android:text="Forgot Password?"
                     android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:alpha="0.9" />
 
-                <com.google.android.material.button.MaterialButton
+                <!-- Log In Button -->
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:layout_marginTop="20dp"
-                    android:backgroundTint="@null"
-                    android:background="@drawable/button_primary_bg"
-                    android:text="Log In"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/login_button"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:cornerRadius="30dp" />
+                    android:elevation="4dp" />
 
+                <!-- Connect with Microsoft Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnMicrosoft"
                     android:layout_width="match_parent"
-                    android:layout_height="58dp"
+                    android:layout_height="64dp"
                     android:layout_marginTop="12dp"
-                    app:backgroundTint="#E6F0FF"
+                    app:backgroundTint="#F0F4FF"
                     app:icon="@drawable/ic_microsoft"
                     app:iconGravity="textStart"
                     app:iconPadding="12dp"
                     app:iconTint="@null"
                     android:text="Connect with Microsoft"
                     android:textAllCaps="false"
-                    android:textColor="#5577AA"
+                    android:textColor="#6688BB"
                     android:textSize="16sp"
-                    app:cornerRadius="30dp"
-                    app:rippleColor="#205577AA" />
+                    app:cornerRadius="32dp"
+                    app:elevation="2dp" />
 
+                <!-- Create Account Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCreateAccount"
                     android:layout_width="match_parent"
-                    android:layout_height="58dp"
+                    android:layout_height="64dp"
                     android:layout_marginTop="12dp"
-                    app:backgroundTint="#E6F0FF"
+                    android:layout_marginBottom="32dp"
+                    app:backgroundTint="#F0F4FF"
                     android:text="Create Account"
                     android:textAllCaps="false"
-                    android:textColor="#5577AA"
+                    android:textColor="#6688BB"
                     android:textSize="16sp"
-                    app:cornerRadius="30dp"
-                    app:rippleColor="#205577AA" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnCloseApp"
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="24dp"
-                    app:backgroundTint="#E6F0FF"
-                    android:text="Close App"
-                    android:textAllCaps="false"
-                    android:textColor="#5577AA"
-                    android:textSize="16sp"
-                    app:cornerRadius="30dp"
-                    app:rippleColor="#205577AA" />
+                    app:cornerRadius="32dp"
+                    app:elevation="2dp" />
 
             </LinearLayout>
 

@@ -24,8 +24,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/ivLogo"
@@ -33,58 +32,25 @@
             android:layout_height="220dp"
             android:src="@drawable/renunite_logo" />
 
-        <TextView
-            android:id="@+id/tvTitle"
+        <ImageView
+            android:id="@+id/ivAppNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="ReNUnite"
-            android:textColor="#FFFFFF"
-            android:textSize="42sp"
-            android:fontFamily="sans-serif-medium"
-            android:textStyle="bold" />
+            android:src="@drawable/renunite_text" />
 
-        <TextView
-            android:id="@+id/tvSubtitle"
+        <ImageView
+            android:id="@+id/ivTagline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reuniting Lost Items at NU Dasmariñas"
-            android:textColor="#B3FFFFFF"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:layout_marginTop="8dp"
+            android:src="@drawable/renunite_tagline" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginBottom="48dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAsAdmin"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:backgroundTint="#FFFFFF"
-            android:text="As an Admin"
-            android:textAllCaps="false"
-            android:textColor="#3A7BD5"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:cornerRadius="30dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAsStudent"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="#FFFFFF"
-            android:text="As a Student"
-            android:textAllCaps="false"
-            android:textColor="#3A7BD5"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:cornerRadius="30dp" />
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="48dp"
+            android:indeterminateTint="#FFFFFF" />
 
     </LinearLayout>
 
