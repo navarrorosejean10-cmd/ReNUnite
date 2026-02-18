@@ -25,7 +25,9 @@ class SplashActivity : AppCompatActivity() {
 
         // Fullscreen
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        setContentView(R.layout.activity_main)
+        
+        // Use dedicated splash layout
+        setContentView(R.layout.activity_splash)
 
         // Delay for 3 seconds then transition to LoginActivity
         Handler(Looper.getMainLooper()).postDelayed({

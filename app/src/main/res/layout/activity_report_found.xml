@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFF">
+    android:background="@drawable/bg_app">
 
     <!-- Header Section -->
     <ImageButton
         android:id="@+id/btnBack"
-        android:layout_width="36dp"
+        android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="56dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:background="@android:color/transparent"
         android:padding="8dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_back_arrow"
@@ -24,139 +24,128 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:text="Report Found Item"
         android:textColor="#4361B5"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/btnBack"
-        app:layout_constraintStart_toEndOf="@id/btnBack"
-        app:layout_constraintTop_toTopOf="@id/btnBack" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
         android:fillViewport="true"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnBack">
+        app:layout_constraintTop_toBottomOf="@+id/btnBack">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="24dp"
+            android:paddingHorizontal="32dp"
             android:paddingBottom="40dp">
 
             <!-- Add Photo Section -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardAddPhoto"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
+                android:layout_height="240dp"
                 app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="28dp"
-                app:cardElevation="4dp">
+                app:cardCornerRadius="32dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#DDE5F5"
+                app:strokeWidth="1.5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bg_dashed_border"
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
-                        app:cardBackgroundColor="#F0F4FF"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="0dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="20dp"
-                            android:src="@drawable/ic_add_photo"
-                            app:tint="#4361B5" />
-                    </androidx.cardview.widget.CardView>
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/img_add_photo"
+                        android:scaleType="fitCenter" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="12dp"
                         android:text="Add Photo"
                         android:textColor="#4361B5"
-                        android:textSize="17sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Up to 3 images"
-                        android:textColor="#A0B3E2"
-                        android:textSize="13sp" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <!-- Form Fields -->
+            <!-- Category Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="Item Category"
+                android:layout_marginTop="24dp"
+                android:text="Category"
                 android:textColor="#4361B5"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/menu"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:boxBackgroundColor="@color/dropdown_box_background_color"
-                app:boxCornerRadiusBottomEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusTopStart="16dp"
-                app:boxStrokeColor="@color/dropdown_box_stroke_color"
-                app:boxStrokeWidth="1dp"
-                app:boxStrokeWidthFocused="2dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                app:boxBackgroundColor="#FFFFFF"
+                app:boxCornerRadiusBottomEnd="28dp"
+                app:boxCornerRadiusBottomStart="28dp"
+                app:boxCornerRadiusTopEnd="28dp"
+                app:boxCornerRadiusTopStart="28dp"
+                app:boxStrokeColor="#DDE5F5"
+                app:boxStrokeWidth="1.5dp"
+                app:boxStrokeWidthFocused="1.5dp"
                 app:hintEnabled="false"
-                app:startIconDrawable="@drawable/ic_id_card"
-                app:startIconTint="#4361B5">
+                app:startIconDrawable="@drawable/circle_indicator"
+                app:startIconTint="#F9B33C"
+                app:endIconTint="#4361B5">
 
                 <AutoCompleteTextView
                     android:id="@+id/autoCompleteCategory"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
                     android:hint="Select Category"
                     android:inputType="none"
-                    android:paddingHorizontal="16dp"
+                    android:paddingStart="48dp"
+                    android:paddingEnd="16dp"
                     android:textColor="#4361B5"
-                    android:textColorHint="#BCC8E5"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:popupBackground="@drawable/dropdown_popup_background" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Location Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="Location Found"
                 android:textColor="#4361B5"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="28dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#DDE5F5"
+                app:strokeWidth="1.5dp">
 
                 <EditText
                     android:id="@+id/etLocation"
@@ -164,28 +153,31 @@
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
                     android:hint="e.g., Library"
-                    android:paddingHorizontal="16dp"
+                    android:paddingHorizontal="20dp"
                     android:textColor="#4361B5"
                     android:textColorHint="#BCC8E5"
                     android:textSize="15sp" />
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
+            <!-- Description Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="Description"
                 android:textColor="#4361B5"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#DDE5F5"
+                app:strokeWidth="1.5dp">
 
                 <EditText
                     android:id="@+id/etDescription"
@@ -193,29 +185,32 @@
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
                     android:gravity="top"
-                    android:hint="Describe where and when you found the item..."
-                    android:padding="16dp"
+                    android:hint="Describe the item..."
+                    android:padding="20dp"
                     android:textColor="#4361B5"
                     android:textColorHint="#BCC8E5"
                     android:textSize="15sp" />
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
+            <!-- Keywords Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Matching Keywords"
+                android:text="Keywords"
                 android:textColor="#4361B5"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="28dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#DDE5F5"
+                app:strokeWidth="1.5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -234,14 +229,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:hint="Type and press comma..."
-                        android:paddingHorizontal="12dp"
-                        android:paddingVertical="8dp"
+                        android:hint="Type keywords (Help us match your item)"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="12dp"
                         android:textColor="#4361B5"
                         android:textColorHint="#BCC8E5"
-                        android:textSize="15sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:id="@+id/tvSuggestedLabel"
@@ -267,30 +262,30 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <com.google.android.material.button.MaterialButton
+            <!-- Updated Submit Button -->
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="40dp"
-                android:backgroundTint="#4361B5"
-                android:text="Report Item"
+                android:layout_height="72dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/bg_btn_submit"
+                android:text="Submit"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                app:cornerRadius="18dp"
-                app:elevation="4dp" />
+                android:elevation="8dp" />
 
             <TextView
                 android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:padding="12dp"
-                android:text="Cancel Report"
-                android:textColor="#A0B3E2"
-                android:textSize="15sp"
+                android:layout_marginTop="16dp"
+                android:padding="8dp"
+                android:text="Cancel"
+                android:textColor="#4361B5"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

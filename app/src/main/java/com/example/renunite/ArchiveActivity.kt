@@ -6,13 +6,12 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 
 class ArchiveActivity : AppCompatActivity() {
 
-    private lateinit var cardArchived1: CardView
-    private lateinit var cardArchived2: CardView
-    private lateinit var cardArchived3: CardView
+    private var cardArchived1: View? = null
+    private var cardArchived2: View? = null
+    private var cardArchived3: View? = null
     private lateinit var autoCompleteFilter: AutoCompleteTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,19 +44,19 @@ class ArchiveActivity : AppCompatActivity() {
     private fun applyFilter(status: String) {
         when (status) {
             "All Items" -> {
-                cardArchived1.visibility = View.VISIBLE
-                cardArchived2.visibility = View.VISIBLE
-                cardArchived3.visibility = View.VISIBLE
+                cardArchived1?.visibility = View.VISIBLE
+                cardArchived2?.visibility = View.VISIBLE
+                cardArchived3?.visibility = View.VISIBLE
             }
             "Claimed" -> {
-                cardArchived1.visibility = View.VISIBLE
-                cardArchived2.visibility = View.VISIBLE
-                cardArchived3.visibility = View.GONE
+                cardArchived1?.visibility = View.VISIBLE
+                cardArchived2?.visibility = View.VISIBLE
+                cardArchived3?.visibility = View.GONE
             }
             "Unclaimed" -> {
-                cardArchived1.visibility = View.GONE
-                cardArchived2.visibility = View.GONE
-                cardArchived3.visibility = View.VISIBLE
+                cardArchived1?.visibility = View.GONE
+                cardArchived2?.visibility = View.GONE
+                cardArchived3?.visibility = View.VISIBLE
             }
         }
     }

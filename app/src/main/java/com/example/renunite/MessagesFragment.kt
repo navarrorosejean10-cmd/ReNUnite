@@ -27,8 +27,8 @@ class MessagesFragment : Fragment() {
 
         etMessage = view.findViewById(R.id.etMessage)
         btnSend = view.findViewById(R.id.btnSend)
-        llMessagesContainer = view.findViewById(R.id.llMessagesContainer)
-        svChat = view.findViewById(R.id.svChat)
+        llMessagesContainer = view.findViewById(R.id.llChatContainer)
+        svChat = view.findViewById(R.id.scrollView)
 
         btnSend.setOnClickListener {
             val messageText = etMessage.text.toString().trim()

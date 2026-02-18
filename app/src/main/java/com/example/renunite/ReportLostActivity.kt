@@ -23,9 +23,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
+import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.chip.Chip
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputLayout
 
@@ -49,8 +49,8 @@ class ReportLostActivity : AppCompatActivity() {
 
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         val btnCancel = findViewById<TextView>(R.id.btnCancel)
-        val btnSubmit = findViewById<MaterialButton>(R.id.btnSubmit)
-        val cardAddPhoto = findViewById<CardView>(R.id.cardAddPhoto)
+        val btnSubmit = findViewById<AppCompatButton>(R.id.btnSubmit)
+        val cardAddPhoto = findViewById<MaterialCardView>(R.id.cardAddPhoto)
         val menu = findViewById<TextInputLayout>(R.id.menu)
         val autoCompleteCategory = findViewById<AutoCompleteTextView>(R.id.autoCompleteCategory)
         val etDescription = findViewById<EditText>(R.id.etDescription)
@@ -161,6 +161,8 @@ class ReportLostActivity : AppCompatActivity() {
             else -> {
                 val intent = Intent(this, SmartMatchActivity::class.java)
                 intent.putExtra("FLOW_TYPE", "LOST")
+                intent.putExtra("CATEGORY", categoryText)
+                intent.putStringArrayListExtra("KEYWORDS", ArrayList(addedKeywords.toList()))
                 startActivity(intent)
                 finish()
             }

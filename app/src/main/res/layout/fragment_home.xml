@@ -3,19 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F7FF">
+    android:background="@drawable/bg_app">
 
-    <!-- Header Logo -->
-    <TextView
-        android:id="@+id/tvHomeLogo"
+    <!-- Header Logo - Significantly increased top margin -->
+    <ImageView
+        android:id="@+id/ivHomeLogo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="sans-serif-black"
-        android:text="ReNUnite"
-        android:textColor="#4361B5"
-        android:textSize="28sp"
-        android:textStyle="bold"
+        android:layout_height="32dp"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/home_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +23,7 @@
         android:fillViewport="true"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvHomeLogo">
+        app:layout_constraintTop_toBottomOf="@id/ivHomeLogo">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,17 +34,18 @@
             <!-- Search Bar -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="56dp"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="8dp"
-                app:cardCornerRadius="26dp"
-                app:cardElevation="0dp">
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFFFFF"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:paddingHorizontal="20dp">
 
                     <ImageView
@@ -70,6 +67,18 @@
                         android:textColor="#4361B5"
                         android:textColorHint="#A0ACCF"
                         android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/ivClearSearch"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_close"
+                        android:visibility="gone"
+                        app:tint="#4361B5"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -77,7 +86,7 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:scrollbars="none">
 
                 <LinearLayout
@@ -90,8 +99,7 @@
                         android:id="@+id/filterAll"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#4361B5"
+                        android:background="@drawable/bg_category_selected"
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp"
                         android:text="All"
@@ -104,12 +112,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#FFFFFF"
+                        android:background="@drawable/bg_category_unselected"
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp"
                         android:text="IDs"
-                        android:textColor="#A0ACCF"
+                        android:textColor="#6A9EF8"
                         android:textSize="12sp" />
 
                     <TextView
@@ -117,12 +124,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#FFFFFF"
+                        android:background="@drawable/bg_category_unselected"
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp"
                         android:text="Gadgets"
-                        android:textColor="#A0ACCF"
+                        android:textColor="#6A9EF8"
                         android:textSize="12sp" />
 
                     <TextView
@@ -130,12 +136,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#FFFFFF"
+                        android:background="@drawable/bg_category_unselected"
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp"
-                        android:text="Personal"
-                        android:textColor="#A0ACCF"
+                        android:text="Personal Items"
+                        android:textColor="#6A9EF8"
                         android:textSize="12sp" />
 
                     <TextView
@@ -143,12 +148,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#FFFFFF"
+                        android:background="@drawable/bg_category_unselected"
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp"
                         android:text="Bags"
-                        android:textColor="#A0ACCF"
+                        android:textColor="#6A9EF8"
                         android:textSize="12sp" />
 
                     <TextView
@@ -156,12 +160,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#FFFFFF"
+                        android:background="@drawable/bg_category_unselected"
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="8dp"
-                        android:text="Others"
-                        android:textColor="#A0ACCF"
+                        android:text="School"
+                        android:textColor="#6A9EF8"
                         android:textSize="12sp" />
                 </LinearLayout>
             </HorizontalScrollView>
@@ -171,140 +174,63 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="16dp"
-                android:columnCount="2">
+                android:layout_marginTop="20dp"
+                android:columnCount="2"
+                android:rowCount="2">
 
                 <!-- Report Lost -->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/btnReportLost"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="4dp"
-                    app:cardBackgroundColor="#6A9EF8"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:padding="12dp">
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_backpack"
-                            app:tint="#FFFFFF" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="Report\nLost Item"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
                 <!-- Report Found -->
-                <androidx.cardview.widget.CardView
+                <ImageView
+                    android:id="@+id/btnReportLost"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/btn_report_lost" />
+
+                <ImageView
                     android:id="@+id/btnReportFound"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_columnWeight="1"
-                    android:layout_margin="4dp"
-                    app:cardBackgroundColor="#6A9EF8"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:padding="12dp">
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_search"
-                            app:tint="#FFFFFF" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="Report\nFound Item"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                    android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/btn_report_found" />
 
                 <!-- My Reports -->
-                <androidx.cardview.widget.CardView
+                <ImageView
                     android:id="@+id/btnMyReports"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_columnWeight="1"
-                    android:layout_margin="4dp"
-                    app:cardBackgroundColor="#6A9EF8"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:padding="12dp">
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_email"
-                            app:tint="#FFFFFF" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="My\nReports"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                    android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/btn_my_reports" />
 
                 <!-- Archive -->
-                <androidx.cardview.widget.CardView
+                <ImageView
                     android:id="@+id/btnArchive"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_columnWeight="1"
-                    android:layout_margin="4dp"
-                    app:cardBackgroundColor="#6A9EF8"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:padding="12dp">
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_archive"
-                            app:tint="#FFFFFF" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="Archive"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                    android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/btn_archive" />
             </GridLayout>
 
-            <!-- Recently Found Items Title -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="24dp"
                 android:text="Recently Found Items"
                 android:textColor="#4361B5"
                 android:textSize="18sp"
@@ -323,12 +249,13 @@
                     android:id="@+id/item1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="1dp">
+                    android:layout_marginBottom="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/bg_item"
                         android:padding="12dp">
                         <androidx.cardview.widget.CardView
                             android:layout_width="80dp"
@@ -339,10 +266,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_id_card"
-                                android:background="#F0F4FF"
-                                android:padding="16dp"
-                                app:tint="#4361B5" />
+                                android:src="@drawable/img_blue_id" />
                         </androidx.cardview.widget.CardView>
                         <LinearLayout
                             android:layout_width="0dp"
@@ -380,7 +304,7 @@
                                 android:layout_marginTop="4dp"
                                 android:ellipsize="end"
                                 android:maxLines="2"
-                                android:text="NU Dasmariñas student ID with blue lanyard. Name starts..."
+                                android:text="NU Dasmariñas student ID with blue lanyard. Name starts with M."
                                 android:textColor="#666666"
                                 android:textSize="13sp" />
                             <LinearLayout
@@ -423,12 +347,13 @@
                     android:id="@+id/item2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="1dp">
+                    android:layout_marginBottom="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/bg_item"
                         android:padding="12dp">
                         <androidx.cardview.widget.CardView
                             android:layout_width="80dp"
@@ -439,10 +364,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_search"
-                                android:background="#F0F4FF"
-                                android:padding="16dp"
-                                app:tint="#4361B5" />
+                                android:src="@drawable/img_iphone" />
                         </androidx.cardview.widget.CardView>
                         <LinearLayout
                             android:layout_width="0dp"
@@ -450,70 +372,22 @@
                             android:layout_marginStart="12dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
-                            <LinearLayout
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="iPhone 13 Pro"
-                                    android:textColor="#1A1A1A"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/input_field_bg"
-                                    android:backgroundTint="#2ECC71"
-                                    android:paddingHorizontal="8dp"
-                                    android:paddingVertical="2dp"
-                                    android:text="Verified"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
+                                android:text="iPhone 13 Pro"
+                                android:textColor="#1A1A1A"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:ellipsize="end"
                                 android:maxLines="2"
-                                android:text="Black iPhone 13 Pro with cracked screen protector. Has..."
+                                android:text="Black iPhone 13 Pro with cracked screen protector."
                                 android:textColor="#666666"
                                 android:textSize="13sp" />
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:gravity="center_vertical">
-                                <ImageView
-                                    android:layout_width="12dp"
-                                    android:layout_height="12dp"
-                                    android:src="@drawable/ic_location"
-                                    app:tint="#A0ACCF" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
-                                    android:text="Library, 2nd"
-                                    android:textColor="#A0ACCF"
-                                    android:textSize="11sp" />
-                                <ImageView
-                                    android:layout_width="12dp"
-                                    android:layout_height="12dp"
-                                    android:layout_marginStart="12dp"
-                                    android:src="@drawable/ic_calendar"
-                                    app:tint="#A0ACCF" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
-                                    android:text="2025-02-10"
-                                    android:textColor="#A0ACCF"
-                                    android:textSize="11sp" />
-                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -523,12 +397,13 @@
                     android:id="@+id/item3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="1dp">
+                    android:layout_marginBottom="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/bg_item"
                         android:padding="12dp">
                         <androidx.cardview.widget.CardView
                             android:layout_width="80dp"
@@ -539,10 +414,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_backpack"
-                                android:background="#F0F4FF"
-                                android:padding="16dp"
-                                app:tint="#4361B5" />
+                                android:src="@drawable/img_red_bottle" />
                         </androidx.cardview.widget.CardView>
                         <LinearLayout
                             android:layout_width="0dp"
@@ -550,70 +422,22 @@
                             android:layout_marginStart="12dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
-                            <LinearLayout
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Red Water Bottle"
-                                    android:textColor="#1A1A1A"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/input_field_bg"
-                                    android:backgroundTint="#2ECC71"
-                                    android:paddingHorizontal="8dp"
-                                    android:paddingVertical="2dp"
-                                    android:text="Verified"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
+                                android:text="Red Water Bottle"
+                                android:textColor="#1A1A1A"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:ellipsize="end"
                                 android:maxLines="2"
-                                android:text="Insulated red water bottle with NU sticker"
+                                android:text="Insulated red water bottle with NU sticker."
                                 android:textColor="#666666"
                                 android:textSize="13sp" />
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:gravity="center_vertical">
-                                <ImageView
-                                    android:layout_width="12dp"
-                                    android:layout_height="12dp"
-                                    android:src="@drawable/ic_location"
-                                    app:tint="#A0ACCF" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
-                                    android:text="Gym"
-                                    android:textColor="#A0ACCF"
-                                    android:textSize="11sp" />
-                                <ImageView
-                                    android:layout_width="12dp"
-                                    android:layout_height="12dp"
-                                    android:layout_marginStart="12dp"
-                                    android:src="@drawable/ic_calendar"
-                                    app:tint="#A0ACCF" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
-                                    android:text="2025-02-08"
-                                    android:textColor="#A0ACCF"
-                                    android:textSize="11sp" />
-                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -623,12 +447,13 @@
                     android:id="@+id/item4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="1dp">
+                    android:layout_marginBottom="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/bg_item"
                         android:padding="12dp">
                         <androidx.cardview.widget.CardView
                             android:layout_width="80dp"
@@ -639,10 +464,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_backpack"
-                                android:background="#F0F4FF"
-                                android:padding="16dp"
-                                app:tint="#4361B5" />
+                                android:src="@drawable/img_backpack" />
                         </androidx.cardview.widget.CardView>
                         <LinearLayout
                             android:layout_width="0dp"
@@ -650,57 +472,22 @@
                             android:layout_marginStart="12dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
-                            <LinearLayout
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Black Backpack"
-                                    android:textColor="#1A1A1A"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/input_field_bg"
-                                    android:backgroundTint="#2ECC71"
-                                    android:paddingHorizontal="8dp"
-                                    android:paddingVertical="2dp"
-                                    android:text="Verified"
-                                    android:textColor="#FFFFFF"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
+                                android:text="Black Backpack"
+                                android:textColor="#1A1A1A"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:ellipsize="end"
                                 android:maxLines="2"
-                                android:text="Black JanSport backpack with laptop compartment"
+                                android:text="Black JanSport backpack with laptop compartment."
                                 android:textColor="#666666"
                                 android:textSize="13sp" />
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:gravity="center_vertical">
-                                <ImageView
-                                    android:layout_width="12dp"
-                                    android:layout_height="12dp"
-                                    android:src="@drawable/ic_location"
-                                    app:tint="#A0ACCF" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
-                                    android:text="Room 304"
-                                    android:textColor="#A0ACCF"
-                                    android:textSize="11sp" />
-                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

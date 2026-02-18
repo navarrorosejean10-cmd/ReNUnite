@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 class HomeFragment : Fragment() {
 
     private lateinit var etSearch: EditText
+    private lateinit var ivClearSearch: ImageView
     private lateinit var item1: CardView
     private lateinit var item2: CardView
     private lateinit var item3: CardView
@@ -33,6 +35,7 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         etSearch = view.findViewById(R.id.etSearch)
+        ivClearSearch = view.findViewById(R.id.ivClearSearch)
         item1 = view.findViewById(R.id.item1)
         item2 = view.findViewById(R.id.item2)
         item3 = view.findViewById(R.id.item3)
@@ -50,20 +53,20 @@ class HomeFragment : Fragment() {
         setupFilters()
         setupSearch()
 
-        // Set up click listeners for quick actions
-        view.findViewById<CardView>(R.id.btnReportLost).setOnClickListener {
+        // Set up click listeners for quick actions using ImageView
+        view.findViewById<ImageView>(R.id.btnReportLost).setOnClickListener {
             startActivity(Intent(requireContext(), ReportLostActivity::class.java))
         }
 
-        view.findViewById<CardView>(R.id.btnReportFound).setOnClickListener {
+        view.findViewById<ImageView>(R.id.btnReportFound).setOnClickListener {
             startActivity(Intent(requireContext(), ReportFoundActivity::class.java))
         }
 
-        view.findViewById<CardView>(R.id.btnMyReports).setOnClickListener {
+        view.findViewById<ImageView>(R.id.btnMyReports).setOnClickListener {
             startActivity(Intent(requireContext(), MyReportsActivity::class.java))
         }
 
-        view.findViewById<CardView>(R.id.btnArchive).setOnClickListener {
+        view.findViewById<ImageView>(R.id.btnArchive).setOnClickListener {
             startActivity(Intent(requireContext(), ArchiveActivity::class.java))
         }
 
@@ -92,6 +95,10 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        ivClearSearch.setOnClickListener {
+            etSearch.text.clear()
+        }
+
         return view
     }
 
@@ -108,13 +115,13 @@ class HomeFragment : Fragment() {
     private fun updateFilterUI() {
         filters.forEach { textView ->
             if (textView.text.toString() == currentFilter) {
-                textView.setBackgroundResource(R.drawable.input_field_bg)
-                textView.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.brand_blue)
+                textView.setBackgroundResource(R.drawable.bg_category_selected)
+                textView.backgroundTintList = null
                 textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             } else {
-                textView.setBackgroundResource(R.drawable.input_field_bg)
-                textView.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.white)
-                textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.tab_unselected))
+                textView.setBackgroundResource(R.drawable.bg_category_unselected)
+                textView.backgroundTintList = null
+                textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.brand_blue_accent))
             }
         }
     }
@@ -124,6 +131,7 @@ class HomeFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 searchQuery = s.toString().lowercase()
+                ivClearSearch.visibility = if (s.isNullOrEmpty()) View.GONE else View.VISIBLE
                 applyFilters()
             }
             override fun afterTextChanged(s: Editable?) {}
@@ -132,7 +140,7 @@ class HomeFragment : Fragment() {
 
     private fun applyFilters() {
         // Item 1: Blue Student ID, Category: IDs
-        val matchesSearch1 = "blue student id".contains(searchQuery) || "nu dasmariñas student id with blue lanyard".contains(searchQuery)
+        val matchesSearch1 = "blue student id".contains(searchQuery) || "nu dasmariñas student id with blue lanyard. name starts with m.".contains(searchQuery)
         val matchesFilter1 = currentFilter == "All" || currentFilter == "IDs"
         item1.visibility = if (matchesSearch1 && matchesFilter1) View.VISIBLE else View.GONE
 
@@ -143,12 +151,12 @@ class HomeFragment : Fragment() {
 
         // Item 3: Red Water Bottle, Category: Others
         val matchesSearch3 = "red water bottle".contains(searchQuery) || "insulated red water bottle with nu sticker".contains(searchQuery)
-        val matchesFilter3 = currentFilter == "All" || currentFilter == "Others"
+        val matchesFilter3 = currentFilter == "All" || currentFilter == "School"
         item3.visibility = if (matchesSearch3 && matchesFilter3) View.VISIBLE else View.GONE
 
         // Item 4: Black Backpack, Category: Bags
         val matchesSearch4 = "black backpack".contains(searchQuery) || "black jansport backpack with laptop compartment".contains(searchQuery)
         val matchesFilter4 = currentFilter == "All" || currentFilter == "Bags"
-        item4.visibility = if (matchesSearch4 && matchesFilter4) View.VISIBLE else View.GONE
+        item4.visibility = if (matchesSearch4 && matchesFilter4) View.GONE else View.GONE
     }
 }

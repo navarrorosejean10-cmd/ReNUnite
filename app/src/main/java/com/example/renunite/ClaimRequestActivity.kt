@@ -5,40 +5,41 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.button.MaterialButton
+import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ClaimRequestActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_claim_request)
 
         val etProof = findViewById<EditText>(R.id.etProof)
+        val btnContinue = findViewById<AppCompatButton>(R.id.btnContinue)
+        val btnCancel = findViewById<AppCompatButton>(R.id.btnCancel)
+        val btnBack = findViewById<ImageButton>(R.id.btnBack)
 
-        // Updated to ImageButton to match the new layout
-        findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
+        btnBack.setOnClickListener {
             finish()
         }
 
-        findViewById<MaterialButton>(R.id.btnCancel).setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-            startActivity(intent)
+        btnCancel.setOnClickListener {
             finish()
         }
 
-        findViewById<MaterialButton>(R.id.btnContinue).setOnClickListener {
+        btnContinue.setOnClickListener {
             val proofText = etProof.text.toString().trim()
             if (proofText.isEmpty()) {
-                showValidationDialog()
+                showIncompleteDialog()
             } else {
+                // Directly proceed to ScheduleAppointmentActivity
                 val intent = Intent(this, ScheduleAppointmentActivity::class.java)
                 startActivity(intent)
             }
         }
     }
 
-    private fun showValidationDialog() {
+    private fun showIncompleteDialog() {
         MaterialAlertDialogBuilder(this)
             .setTitle("Incomplete Request")
             .setMessage("Please provide a description of proof before proceeding.")

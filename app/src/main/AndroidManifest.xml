@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReNUnite">
         <activity
+            android:name="com.example.renunite.ResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.renunite.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.renunite.PrivacyPolicyActivity"
             android:exported="false" />
         <activity

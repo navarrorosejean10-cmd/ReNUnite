@@ -2,7 +2,9 @@ package com.example.renunite
 
 import android.os.Bundle
 import android.view.Gravity
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -24,7 +26,7 @@ class MessagesActivity : AppCompatActivity() {
         val llChatContainer = findViewById<LinearLayout>(R.id.llChatContainer)
         val scrollView = findViewById<ScrollView>(R.id.scrollView)
 
-        btnSend.setOnClickListener {
+        fun sendMessage() {
             val messageText = etMessage.text.toString().trim()
             if (messageText.isNotEmpty()) {
                 addMessageToChat(messageText, true, llChatContainer)
@@ -36,64 +38,80 @@ class MessagesActivity : AppCompatActivity() {
                 }
             }
         }
+
+        btnSend.setOnClickListener {
+            sendMessage()
+        }
+
+        etMessage.setOnEditorActionListener { _, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEND ||
+                (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)
+            ) {
+                sendMessage()
+                true
+            } else {
+                false
+            }
+        }
     }
 
     private fun addMessageToChat(text: String, isSent: Boolean, container: LinearLayout) {
-        val messageLayout = LinearLayout(this)
-        val params = LinearLayout.LayoutParams(
+        val outerLayout = LinearLayout(this)
+        val outerParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
-        params.topMargin = (resources.displayMetrics.density * 16).toInt()
-
+        outerParams.topMargin = (resources.displayMetrics.density * 16).toInt()
         if (isSent) {
-            params.gravity = Gravity.END
+            outerParams.gravity = Gravity.END
         } else {
-            params.gravity = Gravity.START
+            outerParams.gravity = Gravity.START
         }
-        messageLayout.layoutParams = params
-        messageLayout.orientation = LinearLayout.VERTICAL
+        outerLayout.layoutParams = outerParams
+        outerLayout.orientation = LinearLayout.VERTICAL
+
+        val bubbleLayout = LinearLayout(this)
+        bubbleLayout.orientation = LinearLayout.VERTICAL
+        val hPadding = (resources.displayMetrics.density * 16).toInt()
+        val vPadding = (resources.displayMetrics.density * 12).toInt()
+        bubbleLayout.setPadding(hPadding, vPadding, hPadding, vPadding)
+        
+        if (isSent) {
+            bubbleLayout.background = ContextCompat.getDrawable(this, R.drawable.bg_message_bubble_sent)
+        } else {
+            bubbleLayout.background = ContextCompat.getDrawable(this, R.drawable.bg_message_bubble_received)
+        }
 
         val textView = TextView(this)
         textView.text = text
         textView.textSize = 14f
-        textView.setPadding(
-            (resources.displayMetrics.density * 16).toInt(),
-            (resources.displayMetrics.density * 12).toInt(),
-            (resources.displayMetrics.density * 16).toInt(),
-            (resources.displayMetrics.density * 12).toInt()
-        )
-
-        textView.background = ContextCompat.getDrawable(this, R.drawable.input_field_bg)
         if (isSent) {
-            textView.backgroundTintList = ContextCompat.getColorStateList(this, R.color.brand_blue)
             textView.setTextColor(ContextCompat.getColor(this, android.R.color.white))
         } else {
-            textView.backgroundTintList = ContextCompat.getColorStateList(this, R.color.light_blue_50)
             textView.setTextColor(ContextCompat.getColor(this, R.color.brand_blue_dark))
         }
-
-        // Max width for messages
         textView.maxWidth = (resources.displayMetrics.widthPixels * 0.7).toInt()
 
         val timeView = TextView(this)
         val sdf = SimpleDateFormat("h:mm a", Locale.getDefault())
         timeView.text = sdf.format(Date())
         timeView.textSize = 11f
-        timeView.setTextColor(ContextCompat.getColor(this, R.color.text_muted))
-
-        val timeParams = LinearLayout.LayoutParams(
+        timeView.layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        timeParams.topMargin = (resources.displayMetrics.density * 4).toInt()
-        if (isSent) {
-            timeParams.gravity = Gravity.END
+        ).apply {
+            topMargin = (resources.displayMetrics.density * 4).toInt()
         }
-        timeView.layoutParams = timeParams
+        
+        if (isSent) {
+            timeView.setTextColor(ContextCompat.getColor(this, R.color.light_blue_50))
+        } else {
+            timeView.setTextColor(ContextCompat.getColor(this, R.color.text_muted))
+        }
 
-        messageLayout.addView(textView)
-        messageLayout.addView(timeView)
-        container.addView(messageLayout)
+        bubbleLayout.addView(textView)
+        bubbleLayout.addView(timeView)
+        outerLayout.addView(bubbleLayout)
+        container.addView(outerLayout)
     }
 }
