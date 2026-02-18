@@ -25,7 +25,7 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
-        view.findViewById<LinearLayout>(R.id.btnAppPreferences).setOnClickListener {
+        view.findViewById<LinearLayout>(R.id.btnAppSettings).setOnClickListener {
             val intent = Intent(requireContext(), AppSettingsActivity::class.java)
             startActivity(intent)
         }

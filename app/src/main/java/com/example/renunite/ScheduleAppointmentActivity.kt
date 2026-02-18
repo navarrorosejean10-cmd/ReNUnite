@@ -7,8 +7,8 @@ import android.widget.GridLayout
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ScheduleAppointmentActivity : AppCompatActivity() {
@@ -21,8 +21,8 @@ class ScheduleAppointmentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_schedule_appointment)
 
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
-        val btnCancel = findViewById<MaterialButton>(R.id.btnCancel)
-        val btnConfirm = findViewById<MaterialButton>(R.id.btnConfirm)
+        val btnCancel = findViewById<AppCompatButton>(R.id.btnCancel)
+        val btnConfirm = findViewById<AppCompatButton>(R.id.btnConfirm)
         val glDates = findViewById<GridLayout>(R.id.glDates)
         val glTimes = findViewById<GridLayout>(R.id.glTimes)
 
@@ -36,7 +36,7 @@ class ScheduleAppointmentActivity : AppCompatActivity() {
         }
 
         btnConfirm.setOnClickListener {
-            validateAndConfirm()
+            validateAndShowConfirmation()
         }
 
         // Setup Date Selection
@@ -60,15 +60,31 @@ class ScheduleAppointmentActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateAndConfirm() {
+    private fun validateAndShowConfirmation() {
         when {
             selectedDateChip == null -> showValidationDialog("Date")
             selectedTimeChip == null -> showValidationDialog("Time")
             else -> {
-                val intent = Intent(this, AppointmentConfirmedActivity::class.java)
-                startActivity(intent)
+                // Show Confirmation Popup
+                MaterialAlertDialogBuilder(this)
+                    .setTitle("Confirm Appointment")
+                    .setMessage("Are you sure you want to schedule your appointment for ${selectedDateChip?.text} at ${selectedTimeChip?.text}?")
+                    .setPositiveButton("Confirm") { _, _ ->
+                        navigateToConfirmation()
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
             }
         }
+    }
+
+    private fun navigateToConfirmation() {
+        val intent = Intent(this, AppointmentConfirmedActivity::class.java)
+        // Pass data to confirmation screen
+        intent.putExtra("SELECTED_DATE", selectedDateChip?.text.toString())
+        intent.putExtra("SELECTED_TIME", selectedTimeChip?.text.toString())
+        startActivity(intent)
+        finish()
     }
 
     private fun showValidationDialog(missingField: String) {

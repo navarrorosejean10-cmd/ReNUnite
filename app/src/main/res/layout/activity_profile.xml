@@ -4,34 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFF">
+    android:background="@drawable/bg_app">
 
     <!-- Header Section -->
     <ImageButton
         android:id="@+id/btnBack"
-        android:layout_width="36dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="24dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="8dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_back_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="#4361B5" />
+        app:tint="#3D3E9B" />
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:text="Profile"
-        android:textColor="#4361B5"
-        android:textSize="24sp"
+        android:textColor="#3D3E9B"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
-        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/btnBack" />
 
     <ScrollView
@@ -39,6 +39,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:fillViewport="true"
+        android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
@@ -56,7 +57,7 @@
                 android:layout_marginTop="8dp"
                 app:cardBackgroundColor="#6A9EF8"
                 app:cardCornerRadius="32dp"
-                app:cardElevation="8dp">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -80,11 +81,11 @@
                                 android:id="@+id/tvInitials"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="#FFD700"
+                                android:background="@drawable/bg_profile_initials"
                                 android:gravity="center"
                                 android:text="JD"
                                 android:textColor="#333333"
-                                android:textSize="24sp"
+                                android:textSize="28sp"
                                 android:textStyle="bold" />
                         </androidx.cardview.widget.CardView>
 
@@ -125,19 +126,20 @@
                             android:textSize="22sp"
                             android:textStyle="bold"
                             android:inputType="textPersonName"
-                            android:paddingVertical="4dp" />
+                            android:padding="0dp" />
 
                         <EditText
                             android:id="@+id/etStudentId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="4dp"
                             android:background="@android:color/transparent"
                             android:text="2021-12345"
-                            android:textColor="#D1D1D1"
+                            android:textColor="#E0E0E0"
                             android:textSize="14sp"
                             android:inputType="none"
-                            android:enabled="false" />
+                            android:enabled="false"
+                            android:padding="0dp" />
 
                         <EditText
                             android:id="@+id/etEmail"
@@ -145,33 +147,24 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:background="@android:color/transparent"
-                            android:text="jdelacruz@nu-dasma.edu.ph"
-                            android:textColor="#D1D1D1"
+                            android:text="jdelacruz@students.nu-dasma.edu.ph"
+                            android:textColor="#E0E0E0"
                             android:textSize="12sp"
                             android:inputType="none"
-                            android:enabled="false" />
+                            android:enabled="false"
+                            android:padding="0dp" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <!-- Academic Info Card -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginStart="8dp"
-                android:text="ACADEMIC DETAILS"
-                android:textColor="#6A7DC8"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="20dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="32dp"
-                app:cardElevation="0.5dp">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -182,6 +175,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Academic Information"
+                        android:textColor="#3D3E9B"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
                         android:text="Department"
                         android:textColor="#A0B3E2"
                         android:textSize="13sp" />
@@ -196,13 +198,8 @@
                         android:textColor="#1A1A1A"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:inputType="text" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="12dp"
-                        android:background="#F0F4FF" />
+                        android:inputType="text"
+                        android:padding="0dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -222,7 +219,8 @@
                         android:textColor="#1A1A1A"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:padding="0dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -231,12 +229,11 @@
                 android:id="@+id/btnSecurityPassword"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/input_field_bg"
-                android:backgroundTint="#FFFFFF"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_profile_item"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="20dp"
+                android:paddingHorizontal="24dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
@@ -244,9 +241,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_lock"
-                    android:padding="2dp"
-                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_settings"
                     app:tint="#6A9EF8" />
 
                 <TextView
@@ -263,7 +258,6 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:src="@drawable/ic_chevron_right"
-                    android:importantForAccessibility="no"
                     app:tint="#A0B3E2" />
             </LinearLayout>
 
@@ -272,11 +266,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/input_field_bg"
-                android:backgroundTint="#FFFFFF"
+                android:background="@drawable/bg_profile_item"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="20dp"
+                android:paddingHorizontal="24dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
@@ -284,9 +277,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_program"
-                    android:padding="2dp"
-                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_monitor"
                     app:tint="#6A9EF8" />
 
                 <TextView
@@ -303,7 +294,6 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:src="@drawable/ic_chevron_right"
-                    android:importantForAccessibility="no"
                     app:tint="#A0B3E2" />
             </LinearLayout>
 
@@ -314,13 +304,18 @@
                 android:layout_height="64dp"
                 android:layout_marginTop="32dp"
                 android:backgroundTint="#FF6B6B"
-                android:elevation="8dp"
-                android:text="→ Logout"
+                android:text="Logout"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                app:cornerRadius="32dp" />
+                app:cornerRadius="32dp"
+                app:icon="@drawable/ic_logout"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp"
+                app:iconSize="24dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -328,8 +323,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 android:text="ReNUnite v1.0.0"
-                android:textColor="#A0ACCF"
-                android:textSize="12sp" />
+                android:textColor="#6A9EF8"
+                android:textSize="14sp" />
 
         </LinearLayout>
     </ScrollView>

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/windowBackground">
+    android:background="#F5F4FF"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
     <!-- Header -->
     <LinearLayout
@@ -14,27 +16,35 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="24dp"
-        android:paddingTop="16dp"
+        android:paddingTop="56dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         app:layout_constraintTop_toTopOf="parent">
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:src="@drawable/ic_notifications"
-                app:tint="?attr/colorPrimary" />
+                app:tint="#3D3E9B" />
+
             <TextView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="top|end"
+                android:layout_marginTop="-6dp"
+                android:layout_marginEnd="-6dp"
                 android:background="@drawable/circle_indicator"
-                android:backgroundTint="#FF5252"
+                android:backgroundTint="#FF4D4D"
                 android:gravity="center"
                 android:text="2"
                 android:textColor="#FFFFFF"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
         </FrameLayout>
 
@@ -43,388 +53,316 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="Notification"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="32sp"
+            android:textColor="#3D3E9B"
+            android:textSize="36sp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvUnreadBadge"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvUnread"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/input_field_bg"
-        android:backgroundTint="?attr/colorSurface"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
-        android:text="2 Unread"
-        android:textColor="?android:attr/textColorSecondary"
-        android:textSize="14sp"
-        android:textStyle="bold"
+        android:layout_marginTop="24dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llHeader" />
+        app:layout_constraintTop_toBottomOf="@id/llHeader">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:text="2 Unread"
+            android:textColor="#F9B33C"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
+        android:clipToPadding="false"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
-        app:layout_constraintTop_toBottomOf="@id/tvUnreadBadge">
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvUnread">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="24dp"
-            android:paddingBottom="24dp">
+            android:paddingBottom="40dp">
 
-            <!-- Notification 1 -->
+            <!-- New Match Found! -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0.5dp"
-                app:cardBackgroundColor="?attr/colorSurface">
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="32dp"
+                app:cardElevation="2dp">
 
-                <RelativeLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp">
+                    android:padding="24dp">
 
                     <ImageView
                         android:id="@+id/ivIcon1"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:src="@drawable/ic_program"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:tint="#F9B33C" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tvTitle1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_toEndOf="@id/ivIcon1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="New Match Found!"
-                            android:textColor="?android:attr/textColorPrimary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="We found 3 potential matches for your lost item"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Today, 10:30 AM"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:layout_marginEnd="16dp"
+                        android:text="New Match Found!"
+                        android:textColor="#1A1A1A"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/vBadge1"
+                        app:layout_constraintStart_toEndOf="@id/ivIcon1"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <View
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_alignParentEnd="true"
+                        android:id="@+id/vBadge1"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
                         android:background="@drawable/circle_indicator"
-                        android:backgroundTint="#F9B33C" />
-                </RelativeLayout>
+                        android:backgroundTint="#F9B33C"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvDesc1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="We found 3 potential matches for your lost item"
+                        android:textColor="#666666"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tvTitle1"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitle1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Today, 10:30 AM"
+                        android:textColor="#999999"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="@id/tvTitle1"
+                        app:layout_constraintTop_toBottomOf="@id/tvDesc1" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Notification 2 -->
+            <!-- Claim Request Approved -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0.5dp"
-                app:cardBackgroundColor="?attr/colorSurface">
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="32dp"
+                app:cardElevation="2dp">
 
-                <RelativeLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp">
+                    android:padding="24dp">
 
                     <ImageView
                         android:id="@+id/ivIcon2"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/circle_indicator"
-                        android:padding="4dp"
+                        android:src="@drawable/ic_check_circle"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:tint="#2ECC71" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tvTitle2"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_toEndOf="@id/ivIcon2"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Claim Request Approved"
-                            android:textColor="?android:attr/textColorPrimary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Your claim request has been approved by the Discipline Office"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Yesterday, 2:20 PM"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:layout_marginEnd="16dp"
+                        android:text="Claim Request Approved"
+                        android:textColor="#1A1A1A"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/vBadge2"
+                        app:layout_constraintStart_toEndOf="@id/ivIcon2"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <View
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_alignParentEnd="true"
+                        android:id="@+id/vBadge2"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
                         android:background="@drawable/circle_indicator"
-                        android:backgroundTint="#F9B33C" />
-                </RelativeLayout>
+                        android:backgroundTint="#F9B33C"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvDesc2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Your claim request has been approved by the Discipline Office"
+                        android:textColor="#666666"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tvTitle2"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitle2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Yesterday, 2:20 PM"
+                        android:textColor="#999999"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="@id/tvTitle2"
+                        app:layout_constraintTop_toBottomOf="@id/tvDesc2" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Notification 3 -->
+            <!-- Appointment Reminder -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0.5dp"
-                app:cardBackgroundColor="?attr/colorSurface">
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="32dp"
+                app:cardElevation="2dp">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="24dp">
 
                     <ImageView
+                        android:id="@+id/ivIcon3"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:src="@drawable/ic_calendar"
-                        app:tint="?attr/colorPrimary" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#6A9EF8" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tvTitle3"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:orientation="vertical">
+                        android:text="Appointment Reminder"
+                        android:textColor="#1A1A1A"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ivIcon3"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Appointment Reminder"
-                            android:textColor="?android:attr/textColorPrimary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tvDesc3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Your appointment is scheduled for tomorrow at 2:00 PM"
+                        android:textColor="#666666"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tvTitle3"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitle3" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Your appointment is scheduled for tomorrow at 2:00 PM"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Feb 9, 9:00 AM"
+                        android:textColor="#999999"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="@id/tvTitle3"
+                        app:layout_constraintTop_toBottomOf="@id/tvDesc3" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Feb 9, 9:00 AM"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Notification 4 -->
+            <!-- System Update -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0.5dp"
-                app:cardBackgroundColor="?attr/colorSurface">
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="32dp"
+                app:cardElevation="2dp">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="24dp">
 
                     <ImageView
+                        android:id="@+id/ivIcon4"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/ic_program"
-                        app:tint="?attr/colorPrimary" />
+                        android:src="@drawable/ic_school"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#6A9EF8" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tvTitle4"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:orientation="vertical">
+                        android:text="System Update"
+                        android:textColor="#1A1A1A"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ivIcon4"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="System Update"
-                            android:textColor="?android:attr/textColorPrimary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tvDesc4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="ReNUnite has been updated with new features"
+                        android:textColor="#666666"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tvTitle4"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitle4" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="ReNUnite has been updated with new features"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:textSize="14sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Feb 8, 8:00 AM"
+                        android:textColor="#999999"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="@id/tvTitle4"
+                        app:layout_constraintTop_toBottomOf="@id/tvDesc4" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Feb 8, 8:00 AM"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
     </ScrollView>
-
-    <!-- Bottom Navigation -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/bottomNav"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        app:cardElevation="16dp"
-        app:cardBackgroundColor="?attr/colorSurface"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="4dp">
-
-            <LinearLayout
-                android:id="@+id/navHome"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_home"
-                    app:tint="?android:attr/textColorSecondary" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Home"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/navNotifications"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_notifications"
-                    app:tint="?attr/colorPrimary" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Notifications"
-                    android:textColor="?attr/colorPrimary"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/navMessages"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_messages"
-                    app:tint="?android:attr/textColorSecondary" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Messages"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/navProfile"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_person"
-                    app:tint="?android:attr/textColorSecondary" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Profile"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFF">
+    android:background="@drawable/bg_app">
 
     <!-- Header Section -->
     <ImageButton
@@ -25,14 +25,15 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="76dp"
         android:text="Item Details"
         android:textColor="#4361B5"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
         app:layout_constraintStart_toEndOf="@id/btnBack"
-        app:layout_constraintTop_toTopOf="@id/btnBack" />
+        app:layout_constraintTop_toTopOf="@id/btnBack"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -50,285 +51,232 @@
             android:paddingBottom="40dp">
 
             <!-- Item Image Section -->
-            <androidx.cardview.widget.CardView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
-                app:cardBackgroundColor="#E8EFFF"
-                app:cardCornerRadius="32dp"
-                app:cardElevation="0dp">
+                android:layout_height="304dp"
+                android:background="@drawable/bg_smart_item"
+                android:padding="20dp">
 
-                <FrameLayout
+                <ImageView
+                    android:id="@+id/ivItemImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="16dp">
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_id_card" />
+
+                <TextView
+                    android:id="@+id/tvMatchBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:background="@drawable/bg_match_badge"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="12dp"
+                    android:text="92% Match"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:elevation="6dp" />
+
+                <LinearLayout
+                    android:id="@+id/llVerifiedBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/bg_verified_badge"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="12dp"
+                    android:elevation="6dp">
 
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_id_card"
-                        android:background="#FFFFFF"
-                        app:tint="#D32F2F" />
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_check_circle"
+                        app:tint="#FFFFFF" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top|end"
-                        android:layout_margin="12dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#2ECC71"
-                        android:paddingHorizontal="16dp"
-                        android:paddingVertical="8dp"
-                        android:text="92% Match"
+                        android:layout_marginStart="12dp"
+                        android:text="Verified Item"
                         android:textColor="#FFFFFF"
-                        android:textSize="14sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
+                </LinearLayout>
+            </FrameLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|end"
-                        android:layout_margin="12dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#FFD700"
-                        android:gravity="center_vertical"
-                        android:paddingHorizontal="16dp"
-                        android:paddingVertical="8dp">
-
-                        <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@drawable/ic_program"
-                            app:tint="#FFFFFF" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="Verified Item"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </FrameLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Info Card -->
-            <androidx.cardview.widget.CardView
+            <!-- Info Container -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="32dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="32dp"
-                app:cardElevation="0.5dp">
+                android:background="@drawable/bg_item_details"
+                android:orientation="vertical"
+                android:padding="24dp">
 
+                <TextView
+                    android:id="@+id/tvItemName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blue Student ID"
+                    android:textColor="#3D3E9B"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Description"
+                    android:textColor="#5268B9"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/tvItemDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="NU Dasmarinas student ID with blue lanyard. Name starts with M."
+                    android:textColor="#5268B9"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4dp" />
+
+                <!-- Location Label -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp">
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/input_field_bg"
+                    android:backgroundTint="#F4F7FF"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_location"
+                        app:tint="#6478D3" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Blue Student ID"
-                        android:textColor="#4361B5"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Description"
-                        android:textColor="#4361B5"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="NU Dasmarinas student ID with blue lanyard. Name starts with M."
-                        android:textColor="#6A7DC8"
-                        android:textSize="14sp" />
-
-                    <!-- Location Found -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#F8FAFF"
-                        android:gravity="center_vertical"
-                        android:padding="12dp">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_location"
-                            app:tint="#6A7DC8" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:text="Location Found"
-                            android:textColor="#6A7DC8"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#F8FAFF"
-                        android:gravity="center_vertical"
-                        android:padding="12dp">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_location"
-                            app:tint="#6A7DC8" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:text="Library 2nd Floor"
-                            android:textColor="#6A7DC8"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#F8FAFF"
-                        android:gravity="center_vertical"
-                        android:padding="12dp">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_calendar"
-                            app:tint="#6A7DC8" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:text="2026-02-10"
-                            android:textColor="#6A7DC8"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <!-- Tags -->
-                    <com.google.android.material.chip.ChipGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/input_field_bg"
-                            android:backgroundTint="#E8EFFF"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="6dp"
-                            android:text="+ student id"
-                            android:textColor="#6A7DC8"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:background="@drawable/input_field_bg"
-                            android:backgroundTint="#E8EFFF"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="6dp"
-                            android:text="+ blue"
-                            android:textColor="#6A7DC8"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:background="@drawable/input_field_bg"
-                            android:backgroundTint="#E8EFFF"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="6dp"
-                            android:text="+ lanyard"
-                            android:textColor="#6A7DC8"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/input_field_bg"
-                            android:backgroundTint="#E8EFFF"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="6dp"
-                            android:text="id card"
-                            android:textColor="#6A7DC8"
-                            android:textSize="13sp" />
-                    </com.google.android.material.chip.ChipGroup>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnRequestClaim"
-                        android:layout_width="match_parent"
-                        android:layout_height="64dp"
-                        android:layout_marginTop="24dp"
-                        android:backgroundTint="#4361B5"
-                        android:elevation="8dp"
-                        android:text="Request Claim"
-                        android:textAllCaps="false"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:cornerRadius="24dp" />
-
-                    <!-- Security Notice Card -->
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        app:cardBackgroundColor="#FFF8CC"
-                        app:cardCornerRadius="24dp"
-                        app:cardElevation="0dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="16dp">
-
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@drawable/ic_program"
-                                app:tint="#B8860B" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="12dp"
-                                android:text="Security Notice: Your claim will be reviewed by the NU Discipline Office. Be prepared to provide proof of ownership."
-                                android:textColor="#B8860B"
-                                android:textSize="11sp" />
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
+                        android:layout_marginStart="14dp"
+                        android:text="Location Found"
+                        android:textColor="#6478D3"
+                        android:textSize="16sp" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+
+                <!-- Location Value -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/input_field_bg"
+                    android:backgroundTint="#F4F7FF"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_location"
+                        app:tint="#6478D3" />
+
+                    <TextView
+                        android:id="@+id/tvItemLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:text="Library 2nd Floor"
+                        android:textColor="#6478D3"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- Date Value -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/input_field_bg"
+                    android:backgroundTint="#F4F7FF"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_calendar"
+                        app:tint="#6478D3" />
+
+                    <TextView
+                        android:id="@+id/tvItemDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:text="2026-02-10"
+                        android:textColor="#6478D3"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- Tags / Keywords -->
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cgKeywords"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:chipSpacingHorizontal="8dp"
+                    app:chipSpacingVertical="8dp">
+                    <!-- Chips will be added dynamically -->
+                </com.google.android.material.chip.ChipGroup>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnRequestClaim"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/bg_btn_primary"
+                    android:elevation="8dp"
+                    android:text="Request Claim"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Security Notice Card -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/input_field_bg"
+                    android:backgroundTint="#FFF5CC"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_program"
+                        app:tint="#B38E00" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="Security Notice: Your claim will be reviewed by the NU Discipline Office. Be prepared to provide proof of ownership."
+                        android:textColor="#B38E00"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="2dp" />
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
