@@ -149,14 +149,14 @@ class HomeFragment : Fragment() {
         val matchesFilter2 = currentFilter == "All" || currentFilter == "Gadgets"
         item2.visibility = if (matchesSearch2 && matchesFilter2) View.VISIBLE else View.GONE
 
-        // Item 3: Red Water Bottle, Category: Others
+        // Item 3: Red Water Bottle, Category: School AND Personal Items
         val matchesSearch3 = "red water bottle".contains(searchQuery) || "insulated red water bottle with nu sticker".contains(searchQuery)
-        val matchesFilter3 = currentFilter == "All" || currentFilter == "School"
+        val matchesFilter3 = currentFilter == "All" || currentFilter == "School" || currentFilter == "Personal Items"
         item3.visibility = if (matchesSearch3 && matchesFilter3) View.VISIBLE else View.GONE
 
         // Item 4: Black Backpack, Category: Bags
         val matchesSearch4 = "black backpack".contains(searchQuery) || "black jansport backpack with laptop compartment".contains(searchQuery)
         val matchesFilter4 = currentFilter == "All" || currentFilter == "Bags"
-        item4.visibility = if (matchesSearch4 && matchesFilter4) View.GONE else View.GONE
+        item4.visibility = if (matchesSearch4 && matchesFilter4) View.VISIBLE else View.GONE
     }
 }

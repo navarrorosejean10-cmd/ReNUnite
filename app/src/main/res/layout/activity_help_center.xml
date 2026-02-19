@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/windowBackground">
+    android:background="@drawable/bg_app">
 
     <!-- Header Section -->
     <ImageButton
@@ -18,7 +18,7 @@
         android:src="@drawable/ic_back_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="?attr/colorPrimary" />
+        app:tint="#4361B5" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Help Center"
-        android:textColor="?attr/colorPrimary"
+        android:textColor="#4361B5"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="How can we help you?"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="#1E293B"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="20dp"
-                app:cardBackgroundColor="?attr/colorSurface"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="28dp"
                 app:cardElevation="2dp">
 
@@ -75,7 +75,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_search"
-                        app:tint="?attr/colorPrimary" />
+                        app:tint="#4361B5" />
 
                     <EditText
                         android:layout_width="0dp"
@@ -85,8 +85,8 @@
                         android:background="@android:color/transparent"
                         android:hint="Search help articles..."
                         android:inputType="text"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textColorHint="?android:attr/textColorSecondary"
+                        android:textColor="#1E293B"
+                        android:textColorHint="#A0ACCF"
                         android:textSize="15sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="Frequently Asked Questions"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="#1E293B"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -104,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:cardBackgroundColor="?attr/colorSurface"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="1dp">
 
@@ -126,7 +126,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="How do I report a lost item?"
-                            android:textColor="?android:attr/textColorPrimary"
+                            android:textColor="#1E293B"
                             android:textSize="15sp"
                             android:textStyle="bold" />
                         <TextView
@@ -134,14 +134,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="Go to Home screen and click 'Report Lost'. Fill in the details and add photos of your item."
-                            android:textColor="?android:attr/textColorSecondary"
+                            android:textColor="#64748B"
                             android:textSize="14sp" />
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="?attr/dividerHorizontal" />
+                        android:background="#F1F5F9" />
 
                     <!-- FAQ 2 -->
                     <LinearLayout
@@ -156,7 +156,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="What is 'Smart Match'?"
-                            android:textColor="?android:attr/textColorPrimary"
+                            android:textColor="#1E293B"
                             android:textSize="15sp"
                             android:textStyle="bold" />
                         <TextView
@@ -164,14 +164,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="Smart Match automatically connects lost items with found reports based on keywords and categories."
-                            android:textColor="?android:attr/textColorSecondary"
+                            android:textColor="#64748B"
                             android:textSize="14sp" />
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="?attr/dividerHorizontal" />
+                        android:background="#F1F5F9" />
 
                     <!-- FAQ 3 -->
                     <LinearLayout
@@ -186,7 +186,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="How to claim an item?"
-                            android:textColor="?android:attr/textColorPrimary"
+                            android:textColor="#1E293B"
                             android:textSize="15sp"
                             android:textStyle="bold" />
                         <TextView
@@ -194,7 +194,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="If you see your item in the found list, click on it and select 'Claim Item'. You'll need to provide proof of ownership."
-                            android:textColor="?android:attr/textColorSecondary"
+                            android:textColor="#64748B"
                             android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -205,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="Contact Us"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="#1E293B"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -213,7 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:cardBackgroundColor="?attr/colorSurface"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="1dp">
 
@@ -234,21 +234,21 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_email"
-                            app:tint="?attr/colorPrimary" />
+                            app:tint="#4361B5" />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
                             android:text="support@renunite.edu.ph"
-                            android:textColor="?android:attr/textColorPrimary"
+                            android:textColor="#1E293B"
                             android:textSize="15sp" />
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="?attr/dividerHorizontal" />
+                        android:background="#F1F5F9" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -262,14 +262,14 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_location"
-                            app:tint="?attr/colorPrimary" />
+                            app:tint="#4361B5" />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_weight="1"
-                            android:text="Discipline Office, Level 2"
-                            android:textColor="?android:attr/textColorPrimary"
+                            android:text="Discipline Office, 4th Floor NU Dasma"
+                            android:textColor="#1E293B"
                             android:textSize="15sp" />
                     </LinearLayout>
                 </LinearLayout>

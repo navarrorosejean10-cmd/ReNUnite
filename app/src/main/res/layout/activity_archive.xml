@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F4FF"
+    android:background="@drawable/bg_app"
     android:clipChildren="false"
     android:clipToPadding="false">
 
@@ -42,21 +42,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
-        android:text="View closed and achived cases"
+        android:text="View closed and archived cases"
         android:textColor="#6A7DC8"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
-    <!-- Filter Bar -->
+    <!-- Search Bar - Updated to match Home Page style -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvFilter"
+        android:id="@+id/cvSearch"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="56dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="24dp"
         app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="32dp"
+        app:cardCornerRadius="28dp"
         app:cardElevation="2dp"
         app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
 
@@ -65,41 +65,83 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingHorizontal="24dp">
+            android:paddingHorizontal="20dp">
 
             <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_search"
+                app:tint="#4361B5" />
+
+            <EditText
+                android:id="@+id/etSearchArchive"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="Search archived items..."
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:textColor="#4361B5"
+                android:textColorHint="#A0ACCF"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/ivClearSearchArchive"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_search"
-                app:tint="#666666" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilFilter"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                app:boxBackgroundColor="@android:color/transparent"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:hintEnabled="false">
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteFilter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:hint="Filter by status"
-                    android:inputType="none"
-                    android:padding="0dp"
-                    android:textColor="#666666"
-                    android:textSize="18sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
+                android:padding="4dp"
+                android:src="@drawable/ic_close"
+                android:visibility="gone"
+                app:tint="#4361B5"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackgroundBorderless" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <!-- Category Filter Dropdown - Identical style to Report pages -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvCategoryFilter"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="12dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="0dp"
+        app:strokeColor="#DDE5F5"
+        app:strokeWidth="1.5dp"
+        app:layout_constraintTop_toBottomOf="@id/cvSearch">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/menuFilter"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/circle_indicator"
+            app:startIconTint="#F9B33C"
+            app:endIconTint="#4361B5">
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteFilter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="Filter by category"
+                android:inputType="none"
+                android:paddingStart="48dp"
+                android:paddingEnd="16dp"
+                android:textColor="#4361B5"
+                android:textSize="15sp"
+                android:popupBackground="@drawable/dropdown_popup_background" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -110,7 +152,7 @@
         android:fillViewport="true"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cvFilter">
+        app:layout_constraintTop_toBottomOf="@id/cvCategoryFilter">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -130,7 +172,10 @@
                 android:background="@drawable/bg_item"
                 android:elevation="4dp"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="100dp"
@@ -170,7 +215,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/input_field_bg"
+                            android:background="@drawable/bg_verified_badge"
                             android:backgroundTint="#E8F9EE"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="4dp"
@@ -199,7 +244,7 @@
                         <ImageView
                             android:layout_width="16dp"
                             android:layout_height="16dp"
-                            android:src="@drawable/ic_archive"
+                            android:src="@drawable/ic_calendar"
                             app:tint="#6A9EF8" />
 
                         <TextView
@@ -222,7 +267,10 @@
                 android:background="@drawable/bg_item"
                 android:elevation="4dp"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="100dp"
@@ -262,7 +310,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/input_field_bg"
+                            android:background="@drawable/bg_verified_badge"
                             android:backgroundTint="#E8F9EE"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="4dp"
@@ -291,7 +339,7 @@
                         <ImageView
                             android:layout_width="16dp"
                             android:layout_height="16dp"
-                            android:src="@drawable/ic_archive"
+                            android:src="@drawable/ic_calendar"
                             app:tint="#6A9EF8" />
 
                         <TextView
@@ -314,7 +362,10 @@
                 android:background="@drawable/bg_item"
                 android:elevation="4dp"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="100dp"
@@ -354,12 +405,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/input_field_bg"
-                            android:backgroundTint="#FFF8E1"
+                            android:background="@drawable/bg_verified_badge"
+                            android:backgroundTint="#E8F9EE"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="4dp"
-                            android:text="unclaimed"
-                            android:textColor="#FFA000"
+                            android:text="claimed"
+                            android:textColor="#2ECC71"
                             android:textSize="10sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -383,7 +434,7 @@
                         <ImageView
                             android:layout_width="16dp"
                             android:layout_height="16dp"
-                            android:src="@drawable/ic_archive"
+                            android:src="@drawable/ic_calendar"
                             app:tint="#6A9EF8" />
 
                         <TextView

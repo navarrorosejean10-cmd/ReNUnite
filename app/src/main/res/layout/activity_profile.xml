@@ -306,6 +306,7 @@
                 android:backgroundTint="#FF6B6B"
                 android:text="Logout"
                 android:textAllCaps="false"
+                android:letterSpacing="0"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"

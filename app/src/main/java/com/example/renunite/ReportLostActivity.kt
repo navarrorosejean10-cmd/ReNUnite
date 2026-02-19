@@ -1,13 +1,17 @@
 package com.example.renunite
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.TypedValue
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -21,9 +25,11 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.ChipGroup
@@ -42,6 +48,32 @@ class ReportLostActivity : AppCompatActivity() {
         "Lighter", "Keypad", "Android", "iOS", "Apple", "Huawei", "Oppo", "Vivo", "Xiaomi", "Realme"
     )
     private val addedKeywords = mutableSetOf<String>()
+    private var selectedImageUri: Uri? = null
+    private lateinit var ivSelectedPhoto: ImageView
+    private lateinit var llAddPhotoPlaceholder: LinearLayout
+    private lateinit var btnRemovePhotoAttached: ImageButton
+    
+    private lateinit var cvKeywords: MaterialCardView
+    private lateinit var tvKeywordsError: TextView
+
+    private val takePhotoLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val imageBitmap = data?.extras?.get("data") as? android.graphics.Bitmap
+            if (imageBitmap != null) {
+                ivSelectedPhoto.setImageBitmap(imageBitmap)
+                updatePhotoVisibility(true)
+            }
+        }
+    }
+
+    private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        if (uri != null) {
+            selectedImageUri = uri
+            ivSelectedPhoto.setImageURI(uri)
+            updatePhotoVisibility(true)
+        }
+    }
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +83,20 @@ class ReportLostActivity : AppCompatActivity() {
         val btnCancel = findViewById<TextView>(R.id.btnCancel)
         val btnSubmit = findViewById<AppCompatButton>(R.id.btnSubmit)
         val cardAddPhoto = findViewById<MaterialCardView>(R.id.cardAddPhoto)
+        ivSelectedPhoto = findViewById(R.id.ivSelectedPhoto)
+        llAddPhotoPlaceholder = findViewById(R.id.llAddPhotoPlaceholder)
+        btnRemovePhotoAttached = findViewById(R.id.btnRemovePhotoAttached)
+        
+        val cvCategory = findViewById<MaterialCardView>(R.id.cvCategory)
         val menu = findViewById<TextInputLayout>(R.id.menu)
         val autoCompleteCategory = findViewById<AutoCompleteTextView>(R.id.autoCompleteCategory)
+        val tvCategoryError = findViewById<TextView>(R.id.tvCategoryError)
         val etDescription = findViewById<EditText>(R.id.etDescription)
+        val cvDescription = findViewById<MaterialCardView>(R.id.cvDescription)
+        val tvDescriptionError = findViewById<TextView>(R.id.tvDescriptionError)
         val etKeywords = findViewById<EditText>(R.id.etKeywords)
+        cvKeywords = findViewById(R.id.cvKeywords)
+        tvKeywordsError = findViewById(R.id.tvKeywordsError)
         val cgKeywords = findViewById<ChipGroup>(R.id.cgKeywords)
         val llChipContainer = findViewById<LinearLayout>(R.id.llChipContainer)
         val tvSuggestedLabel = findViewById<TextView>(R.id.tvSuggestedLabel)
@@ -63,11 +105,17 @@ class ReportLostActivity : AppCompatActivity() {
         btnCancel.setOnClickListener { finish() }
 
         btnSubmit.setOnClickListener {
-            validateAndSubmit(autoCompleteCategory, etDescription)
+            validateAndSubmit(autoCompleteCategory, tvCategoryError, cvCategory, etDescription, tvDescriptionError, cvDescription)
         }
 
         cardAddPhoto.setOnClickListener {
-            showPhotoOptionsDialog()
+            if (ivSelectedPhoto.visibility == View.GONE) {
+                showPhotoOptionsDialog()
+            }
+        }
+
+        btnRemovePhotoAttached.setOnClickListener {
+            clearPhoto()
         }
 
         // Setup Category Dropdown
@@ -98,6 +146,10 @@ class ReportLostActivity : AppCompatActivity() {
                 R.drawable.ic_school
             )
             menu.setStartIconDrawable(icons[position])
+            
+            // Clear error
+            tvCategoryError.visibility = View.GONE
+            cvCategory.strokeWidth = 0
 
             if (selectedCategory == "Others") {
                 autoCompleteCategory.inputType = InputType.TYPE_CLASS_TEXT
@@ -114,6 +166,18 @@ class ReportLostActivity : AppCompatActivity() {
         autoCompleteCategory.setOnClickListener {
             autoCompleteCategory.showDropDown()
         }
+
+        etDescription.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.toString().trim().isNotEmpty()) {
+                    tvDescriptionError.visibility = View.GONE
+                    cvDescription.strokeColor = Color.parseColor("#DDE5F5")
+                    cvDescription.strokeWidth = 0
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
         // Keyword tagging logic
         etKeywords.addTextChangedListener(object : TextWatcher {
@@ -150,42 +214,72 @@ class ReportLostActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateAndSubmit(category: AutoCompleteTextView, description: EditText) {
-        val categoryText = category.text.toString().trim()
-        val descriptionText = description.text.toString().trim()
-        
-        when {
-            categoryText.isEmpty() -> showValidationDialog("Item Category")
-            descriptionText.isEmpty() -> showValidationDialog("Description")
-            addedKeywords.isEmpty() -> showValidationDialog("Keywords")
-            else -> {
-                val intent = Intent(this, SmartMatchActivity::class.java)
-                intent.putExtra("FLOW_TYPE", "LOST")
-                intent.putExtra("CATEGORY", categoryText)
-                intent.putStringArrayListExtra("KEYWORDS", ArrayList(addedKeywords.toList()))
-                startActivity(intent)
-                finish()
-            }
+    private fun updatePhotoVisibility(isPhotoAttached: Boolean) {
+        if (isPhotoAttached) {
+            ivSelectedPhoto.visibility = View.VISIBLE
+            btnRemovePhotoAttached.visibility = View.VISIBLE
+            llAddPhotoPlaceholder.visibility = View.GONE
+        } else {
+            ivSelectedPhoto.visibility = View.GONE
+            btnRemovePhotoAttached.visibility = View.GONE
+            llAddPhotoPlaceholder.visibility = View.VISIBLE
         }
     }
 
-    private fun showValidationDialog(missingField: String) {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_validation_branded, null)
-        val dialog = AlertDialog.Builder(this)
-            .setView(dialogView)
-            .create()
+    private fun clearPhoto() {
+        selectedImageUri = null
+        ivSelectedPhoto.setImageDrawable(null)
+        updatePhotoVisibility(false)
+    }
 
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    private fun validateAndSubmit(
+        category: AutoCompleteTextView, 
+        catError: TextView, 
+        catCard: MaterialCardView,
+        description: EditText, 
+        descError: TextView,
+        descCard: MaterialCardView
+    ) {
+        val categoryText = category.text.toString().trim()
+        val descriptionText = description.text.toString().trim()
+        
+        var isValid = true
 
-        val tvMessage = dialogView.findViewById<TextView>(R.id.tvDialogMessage)
-        val btnOk = dialogView.findViewById<MaterialButton>(R.id.btnDialogPositive)
-
-        tvMessage.text = "Please provide the $missingField before proceeding."
-        btnOk.setOnClickListener {
-            dialog.dismiss()
+        if (categoryText.isEmpty()) {
+            catError.visibility = View.VISIBLE
+            catCard.strokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1.5f, resources.displayMetrics).toInt()
+            catCard.strokeColor = Color.parseColor("#FF5252")
+            isValid = false
+        } else {
+            catError.visibility = View.GONE
         }
 
-        dialog.show()
+        if (descriptionText.isEmpty()) {
+            descError.visibility = View.VISIBLE
+            descCard.strokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1.5f, resources.displayMetrics).toInt()
+            descCard.strokeColor = Color.parseColor("#FF5252")
+            isValid = false
+        } else {
+            descError.visibility = View.GONE
+        }
+
+        if (addedKeywords.isEmpty()) {
+            tvKeywordsError.visibility = View.VISIBLE
+            cvKeywords.strokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1.5f, resources.displayMetrics).toInt()
+            cvKeywords.strokeColor = Color.parseColor("#FF5252")
+            isValid = false
+        } else {
+            tvKeywordsError.visibility = View.GONE
+        }
+
+        if (isValid) {
+            val intent = Intent(this, SmartMatchActivity::class.java)
+            intent.putExtra("FLOW_TYPE", "LOST")
+            intent.putExtra("CATEGORY", categoryText)
+            intent.putStringArrayListExtra("KEYWORDS", ArrayList(addedKeywords.toList()))
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun addKeywordChip(keyword: String, chipGroup: ChipGroup, editText: EditText) {
@@ -201,6 +295,11 @@ class ReportLostActivity : AppCompatActivity() {
 
         tvName.text = keyword
         addedKeywords.add(keywordLower)
+        
+        // Hide error when a keyword is added
+        tvKeywordsError.visibility = View.GONE
+        cvKeywords.strokeColor = Color.parseColor("#DDE5F5")
+        cvKeywords.strokeWidth = 0
 
         btnRemove.setOnClickListener {
             chipGroup.removeView(chipView)
@@ -249,12 +348,13 @@ class ReportLostActivity : AppCompatActivity() {
         val btnCancel = dialogView.findViewById<MaterialButton>(R.id.btnCancelPhoto)
 
         btnTakePhoto.setOnClickListener {
-            // Handle Take Photo
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            takePhotoLauncher.launch(intent)
             dialog.dismiss()
         }
 
         btnChooseGallery.setOnClickListener {
-            // Handle Gallery
+            pickImageLauncher.launch("image/*")
             dialog.dismiss()
         }
 

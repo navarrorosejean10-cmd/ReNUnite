@@ -148,36 +148,20 @@
                     android:textSize="16sp"
                     android:lineSpacingExtra="4dp" />
 
-                <!-- Location Label -->
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:background="@drawable/input_field_bg"
-                    android:backgroundTint="#F4F7FF"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_location"
-                        app:tint="#6478D3" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:text="Location Found"
-                        android:textColor="#6478D3"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                    android:text="Location Found"
+                    android:textColor="#5268B9"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <!-- Location Value -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/input_field_bg"
                     android:backgroundTint="#F4F7FF"
                     android:gravity="center_vertical"
@@ -199,11 +183,20 @@
                         android:textSize="16sp" />
                 </LinearLayout>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Date Found"
+                    android:textColor="#5268B9"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
                 <!-- Date Value -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/input_field_bg"
                     android:backgroundTint="#F4F7FF"
                     android:gravity="center_vertical"
@@ -225,12 +218,21 @@
                         android:textSize="16sp" />
                 </LinearLayout>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Item Keywords"
+                    android:textColor="#5268B9"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
                 <!-- Tags / Keywords -->
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/cgKeywords"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="12dp"
                     app:chipSpacingHorizontal="8dp"
                     app:chipSpacingVertical="8dp">
                     <!-- Chips will be added dynamically -->
@@ -239,7 +241,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnRequestClaim"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="32dp"
                     android:background="@drawable/bg_btn_primary"
                     android:elevation="8dp"

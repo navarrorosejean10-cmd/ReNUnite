@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFF">
+    android:background="@drawable/bg_app">
 
     <!-- Header Section -->
     <ImageButton
@@ -24,14 +24,15 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="64dp"
         android:text="Report Details"
         android:textColor="#4361B5"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
         app:layout_constraintStart_toEndOf="@id/btnBack"
-        app:layout_constraintTop_toTopOf="@id/btnBack" />
+        app:layout_constraintTop_toTopOf="@id/btnBack"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -48,230 +49,253 @@
             android:paddingHorizontal="24dp"
             android:paddingBottom="40dp">
 
-            <!-- Item Image Section -->
-            <androidx.cardview.widget.CardView
+            <!-- Item Image Section - Unified with Item Details Format -->
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
-                app:cardBackgroundColor="#E8EFFF"
-                app:cardCornerRadius="32dp"
-                app:cardElevation="0dp">
+                android:layout_height="304dp"
+                android:background="@drawable/bg_smart_item"
+                android:padding="20dp">
 
-                <FrameLayout
+                <ImageView
+                    android:id="@+id/ivItemImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="16dp">
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_search" />
 
-                    <ImageView
-                        android:id="@+id/ivItemImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_search"
-                        android:background="#FFFFFF"
-                        app:tint="#4361B5" />
+                <!-- Dynamic Status Badge -->
+                <TextView
+                    android:id="@+id/tvStatusBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:background="@drawable/input_field_bg"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="Pending"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
 
-                    <TextView
-                        android:id="@+id/tvStatusBadge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top|end"
-                        android:layout_margin="12dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#FFF8E1"
-                        android:paddingHorizontal="16dp"
-                        android:paddingVertical="8dp"
-                        android:text="Pending"
-                        android:textColor="#FFA000"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </FrameLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Info Card -->
-            <androidx.cardview.widget.CardView
+            <!-- Info Container -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="32dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="32dp"
-                app:cardElevation="0.5dp">
+                android:background="@drawable/bg_item_details"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:id="@+id/tvItemName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Item Name"
+                    android:textColor="#3D3E9B"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Description"
+                    android:textColor="#5268B9"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Description text goes here..."
+                    android:textColor="#5268B9"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Location"
+                    android:textColor="#5268B9"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp">
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_field_bg"
+                    android:backgroundTint="#F4F7FF"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_location"
+                        app:tint="#6478D3" />
 
                     <TextView
-                        android:id="@+id/tvItemName"
-                        android:layout_width="match_parent"
+                        android:id="@+id/tvLocation"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Black Wallet"
-                        android:textColor="#4361B5"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:layout_marginStart="14dp"
+                        android:text="Library 2nd Floor"
+                        android:textColor="#6478D3"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Date"
+                    android:textColor="#5268B9"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/input_field_bg"
+                    android:backgroundTint="#F4F7FF"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_calendar"
+                        app:tint="#6478D3" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/tvDate"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Description"
-                        android:textColor="#4361B5"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:layout_marginStart="14dp"
+                        android:text="2024-04-10"
+                        android:textColor="#6478D3"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvDescription"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Leather wallet with credit cards"
-                        android:textColor="#6A7DC8"
-                        android:textSize="14sp" />
+                <!-- Status Timeline -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Status Timeline"
+                    android:textColor="#3D3E9B"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical">
+
+                    <!-- Current Status Row -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#F8FAFF"
-                        android:gravity="center_vertical"
-                        android:padding="12dp">
-
-                        <ImageView
+                        android:gravity="center_vertical">
+                        <FrameLayout
                             android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_location"
-                            app:tint="#6A7DC8" />
-
-                        <TextView
-                            android:id="@+id/tvLocation"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:text="Unknown Location"
-                            android:textColor="#6A7DC8"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#F8FAFF"
-                        android:gravity="center_vertical"
-                        android:padding="12dp">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_calendar"
-                            app:tint="#6A7DC8" />
-
-                        <TextView
-                            android:id="@+id/tvDate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:text="2024-04-10"
-                            android:textColor="#6A7DC8"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:text="Status Timeline"
-                        android:textColor="#4361B5"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical">
+                            android:layout_height="20dp">
                             <View
+                                android:id="@+id/vStatusIndicator"
                                 android:layout_width="12dp"
                                 android:layout_height="12dp"
-                                android:background="@drawable/circle_indicator"
-                                android:backgroundTint="#4CAF50" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="12dp"
-                                android:text="Report Submitted"
-                                android:textColor="#1A1A1A"
-                                android:textSize="14sp" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="end"
-                                android:text="April 10"
-                                android:textColor="#A0B3E2"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="2dp"
-                            android:layout_height="24dp"
-                            android:layout_marginStart="5dp"
-                            android:background="#E8EFFF" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical">
-                            <View
-                                android:layout_width="12dp"
-                                android:layout_height="12dp"
+                                android:layout_gravity="center"
                                 android:background="@drawable/circle_indicator"
                                 android:backgroundTint="#FFA000" />
-                            <TextView
-                                android:id="@+id/tvCurrentStatusLabel"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="12dp"
-                                android:text="Pending Verification"
-                                android:textColor="#1A1A1A"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="end"
-                                android:text="Today"
-                                android:textColor="#A0B3E2"
-                                android:textSize="12sp" />
-                        </LinearLayout>
+                            <ImageView
+                                android:id="@+id/ivStatusCheck"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_check_circle"
+                                android:visibility="gone"
+                                app:tint="#4CAF50" />
+                        </FrameLayout>
+                        <TextView
+                            android:id="@+id/tvCurrentStatusLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:text="Pending Verification"
+                            android:textColor="#1A1A1A"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tvStatusDate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="Today"
+                            android:textColor="#A0B3E2"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCancelReport"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_marginTop="32dp"
-                        android:text="Cancel This Report"
-                        android:textAllCaps="false"
-                        android:textColor="#D32F2F"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:cornerRadius="24dp"
-                        app:strokeColor="#D32F2F" />
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="9dp"
+                        android:background="#E8EFFF" />
 
+                    <!-- Submitted Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+                        <View
+                            android:id="@+id/vSubmittedIndicator"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_marginStart="4dp"
+                            android:background="@drawable/circle_indicator"
+                            android:backgroundTint="#FFC107" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:text="Report Submitted"
+                            android:textColor="#1A1A1A"
+                            android:textSize="15sp" />
+                        <TextView
+                            android:id="@+id/tvSubmittedDate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="April 10"
+                            android:textColor="#A0B3E2"
+                            android:textSize="12sp" />
+                    </LinearLayout>
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancelReport"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Cancel This Report"
+                    android:letterSpacing="0"
+                    android:textAllCaps="false"
+                    android:textColor="#D32F2F"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="24dp"
+                    app:strokeColor="#D32F2F" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

@@ -60,27 +60,53 @@
                 app:strokeColor="#DDE5F5"
                 app:strokeWidth="1.5dp">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/llAddPhotoPlaceholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:src="@drawable/img_add_photo"
+                            android:scaleType="fitCenter" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Add Photo"
+                            android:textColor="#4361B5"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
                     <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/img_add_photo"
-                        android:scaleType="fitCenter" />
+                        android:id="@+id/ivSelectedPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:visibility="gone" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageButton
+                        android:id="@+id/btnRemovePhotoAttached"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="top|end"
                         android:layout_marginTop="12dp"
-                        android:text="Add Photo"
-                        android:textColor="#4361B5"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                        android:layout_marginEnd="12dp"
+                        android:background="@drawable/bg_pop_up_icon"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_close"
+                        android:visibility="gone"
+                        app:tint="@color/white" />
+                </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Category Section -->
@@ -93,39 +119,61 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/menu"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvCategory"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
-                app:boxBackgroundColor="#FFFFFF"
-                app:boxCornerRadiusBottomEnd="28dp"
-                app:boxCornerRadiusBottomStart="28dp"
-                app:boxCornerRadiusTopEnd="28dp"
-                app:boxCornerRadiusTopStart="28dp"
-                app:boxStrokeColor="#DDE5F5"
-                app:boxStrokeWidth="1.5dp"
-                app:boxStrokeWidthFocused="1.5dp"
-                app:hintEnabled="false"
-                app:startIconDrawable="@drawable/circle_indicator"
-                app:startIconTint="#F9B33C"
-                app:endIconTint="#4361B5">
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#FF5252"
+                app:strokeWidth="0dp">
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteCategory"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/menu"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:hint="Select Category"
-                    android:inputType="none"
-                    android:paddingStart="48dp"
-                    android:paddingEnd="16dp"
-                    android:textColor="#4361B5"
-                    android:textSize="15sp"
-                    android:popupBackground="@drawable/dropdown_popup_background" />
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintEnabled="false"
+                    app:startIconDrawable="@drawable/circle_indicator"
+                    app:startIconTint="#F9B33C"
+                    app:endIconTint="#4361B5">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Select Category"
+                        android:inputType="none"
+                        android:textColor="#4361B5"
+                        android:textSize="15sp"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="0dp"
+                        android:background="@android:color/transparent"
+                        android:popupBackground="@drawable/dropdown_popup_background" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tvCategoryError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="16dp"
+                android:text="Please select a category"
+                android:textColor="#FF5252"
+                android:textSize="13sp"
+                android:textStyle="italic"
+                android:shadowColor="#FFFFFFFF"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:visibility="gone" />
 
             <!-- Description Section -->
             <TextView
@@ -138,6 +186,7 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 android:layout_marginTop="12dp"
@@ -160,6 +209,22 @@
                     android:textSize="15sp" />
             </com.google.android.material.card.MaterialCardView>
 
+            <TextView
+                android:id="@+id/tvDescriptionError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="16dp"
+                android:text="Please provide a description"
+                android:textColor="#FF5252"
+                android:textSize="13sp"
+                android:textStyle="italic"
+                android:shadowColor="#FFFFFFFF"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:visibility="gone" />
+
             <!-- Keywords Section -->
             <TextView
                 android:layout_width="wrap_content"
@@ -171,6 +236,7 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvKeywords"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -207,6 +273,22 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
+                android:id="@+id/tvKeywordsError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="16dp"
+                android:text="Please add at least one keyword"
+                android:textColor="#FF5252"
+                android:textSize="13sp"
+                android:textStyle="italic"
+                android:shadowColor="#FFFFFFFF"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:visibility="gone" />
+
+            <TextView
                 android:id="@+id/tvSuggestedLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -234,7 +316,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
-                android:layout_height="72dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/bg_btn_submit"
                 android:text="Submit"

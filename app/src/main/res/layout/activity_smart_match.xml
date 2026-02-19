@@ -6,33 +6,34 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_app">
 
+    <!-- Close Button -->
+
     <!-- Header Section -->
+
     <ImageButton
         android:id="@+id/btnClose"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="340dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"
-        android:scaleType="fitCenter"
         android:src="@drawable/ic_close"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="#4361B5" />
+        app:tint="#3D3E9B" />
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
         android:text="Smart Match"
         android:textColor="#3D3E9B"
         android:textSize="26sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/btnClose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btnClose" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -40,7 +41,7 @@
         android:layout_marginTop="16dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnClose">
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,6 +64,7 @@
                     android:padding="24dp">
 
                     <ImageView
+                        android:id="@+id/ivSummaryIcon"
                         android:layout_width="140dp"
                         android:layout_height="140dp"
                         android:src="@drawable/img_smart"
@@ -94,7 +96,8 @@
                         android:layout_marginTop="12dp"
                         android:gravity="center"
                         android:lineSpacingExtra="4dp"
-                        android:text="Based on your report, here are items\nthat might match what you found:"
+                        android:text="Based on your report, there are no items
+that might match what you found:"
                         android:textColor="#5268B9"
                         android:textSize="14sp" />
                 </LinearLayout>

@@ -6,40 +6,41 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_app">
 
-    <!-- Header: Back Arrow -->
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_back_arrow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="#3D3E9B" />
-
     <ScrollView
-        android:layout_width="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:fillViewport="false"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBack">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="24dp"
-            android:paddingBottom="32dp">
+            android:paddingBottom="64dp">
+
+            <!-- Header - Lowered slightly -->
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="56dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_back_arrow"
+                app:tint="#3D3E9B" />
 
             <!-- Main Content Card -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -133,19 +134,44 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <EditText
-                        android:id="@+id/etProof"
+                    <LinearLayout
+                        android:id="@+id/llProofContainer"
                         android:layout_width="match_parent"
-                        android:layout_height="140dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:background="@drawable/input_field_bg"
-                        android:backgroundTint="#FFFFFF"
-                        android:gravity="top"
-                        android:hint="Example: This is my student ID. My name is printed..."
-                        android:padding="16dp"
-                        android:textColor="#3D3E9B"
-                        android:textColorHint="#A7B4D2"
-                        android:textSize="14sp" />
+                        android:background="@drawable/input_field_bg_rounded"
+                        android:padding="2dp">
+
+                        <EditText
+                            android:id="@+id/etProof"
+                            android:layout_width="match_parent"
+                            android:layout_height="140dp"
+                            android:background="@android:color/transparent"
+                            android:gravity="top"
+                            android:hint="Example: This is my student ID. My name is printed..."
+                            android:padding="16dp"
+                            android:textColor="#3D3E9B"
+                            android:textColorHint="#A7B4D2"
+                            android:textSize="14sp"
+                            android:importantForAutofill="no"
+                            android:inputType="textMultiLine" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvProofError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="4dp"
+                        android:text="Please provide a description of proof"
+                        android:textColor="#FF5252"
+                        android:textSize="13sp"
+                        android:textStyle="italic"
+                        android:shadowColor="#FFFFFFFF"
+                        android:shadowDx="1"
+                        android:shadowDy="1"
+                        android:shadowRadius="2"
+                        android:visibility="gone" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -163,7 +189,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/input_field_bg"
                 android:backgroundTint="#FFF5CC"
                 android:gravity="center_vertical"
@@ -172,6 +198,7 @@
                 android:paddingVertical="12dp">
 
                 <ImageView
+                    android:id="@+id/ivPrivacyLock"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_lock"
@@ -187,38 +214,44 @@
                     android:textSize="13sp" />
             </LinearLayout>
 
-            <!-- Buttons Row -->
+            <!-- Buttons Row - Balanced and Stylized -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
-                <androidx.appcompat.widget.AppCompatButton
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCancel"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
+                    android:layout_height="64dp"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:background="@drawable/input_field_bg"
-                    android:backgroundTint="#D1E2FF"
                     android:text="Cancel"
                     android:textAllCaps="false"
                     android:textColor="#3D3E9B"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:backgroundTint="#D1E2FF"
+                    android:letterSpacing="0"
+                    app:cornerRadius="32dp" />
 
-                <androidx.appcompat.widget.AppCompatButton
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnContinue"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_btn_primary"
                     android:text="Continue"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:backgroundTint="#6699FF"
+                    app:cornerRadius="32dp"
+                    android:letterSpacing="0"
+                    app:elevation="4dp" />
             </LinearLayout>
 
         </LinearLayout>

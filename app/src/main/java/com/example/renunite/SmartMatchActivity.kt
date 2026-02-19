@@ -9,8 +9,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 
 class SmartMatchActivity : AppCompatActivity() {
 
@@ -39,7 +37,23 @@ class SmartMatchActivity : AppCompatActivity() {
         val reportedKeywords = intent.getStringArrayListExtra("KEYWORDS") ?: arrayListOf()
         val flowType = intent.getStringExtra("FLOW_TYPE") ?: "LOST"
 
-        findViewById<ImageButton>(R.id.btnClose).setOnClickListener { finish() }
+        // Handle close button
+        findViewById<ImageButton>(R.id.btnClose).setOnClickListener {
+            finish()
+        }
+
+        // Find the summary image view
+        val ivSummaryIcon = findViewById<ImageView>(R.id.ivSummaryIcon)
+
+        // Logic for category icons
+        val categoryIcon = when (reportedCategory.lowercase()) {
+            "gadgets" -> R.drawable.img_yellow
+            "ids" -> R.drawable.img_red
+            "personal items" -> R.drawable.img_blue
+            else -> R.drawable.img_green
+        }
+        
+        ivSummaryIcon?.setImageResource(categoryIcon)
 
         val llMatchContainer = findViewById<LinearLayout>(R.id.llMatchContainer)
         val tvMatchCount = findViewById<TextView>(R.id.tvMatchCount)

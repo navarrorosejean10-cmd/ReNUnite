@@ -2,15 +2,20 @@ package com.example.renunite
 
 import android.app.Dialog
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
 import android.text.InputType
 import android.text.SpannableString
+import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextPaint
+import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.View
 import android.view.Window
 import android.widget.ArrayAdapter
@@ -75,12 +80,30 @@ class CreateAccountActivity : AppCompatActivity() {
         
         val etFirstName = findViewById<EditText>(R.id.etFirstName)
         val etLastName = findViewById<EditText>(R.id.etLastName)
+        
         val etStudentId = findViewById<EditText>(R.id.etStudentId)
+        val llStudentIdContainer = findViewById<LinearLayout>(R.id.llStudentIdContainer)
+        val tvStudentIdError = findViewById<TextView>(R.id.tvStudentIdError)
+        
         val etEmail = findViewById<EditText>(R.id.etEmail)
+        val llEmailContainer = findViewById<LinearLayout>(R.id.llEmailContainer)
+        val tvEmailError = findViewById<TextView>(R.id.tvEmailError)
+        
         val etPassword = findViewById<EditText>(R.id.etPassword)
+        val llPasswordContainer = findViewById<LinearLayout>(R.id.llPasswordContainer)
         val ivPasswordVisibility = findViewById<ImageView>(R.id.ivPasswordVisibility)
+        val llRequirementsContainer = findViewById<LinearLayout>(R.id.llRequirementsContainer)
+        
         val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
+        val llConfirmPasswordContainer = findViewById<LinearLayout>(R.id.llConfirmPasswordContainer)
         val ivConfirmPasswordVisibility = findViewById<ImageView>(R.id.ivConfirmPasswordVisibility)
+        
+        val tvRequirementLength = findViewById<TextView>(R.id.tvRequirementLength)
+        val tvRequirementAlphabet = findViewById<TextView>(R.id.tvRequirementAlphabet)
+        val tvRequirementNumber = findViewById<TextView>(R.id.tvRequirementNumber)
+        val tvRequirementSpecial = findViewById<TextView>(R.id.tvRequirementSpecial)
+        val tvRequirementMatch = findViewById<TextView>(R.id.tvRequirementMatch)
+        
         val cbTerms = findViewById<CheckBox>(R.id.cbTerms)
         val tvTerms = findViewById<TextView>(R.id.tvTerms)
 
@@ -94,7 +117,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
         actDepartment.setOnItemClickListener { parent, _, position, _ ->
             selectedDepartment = parent.getItemAtPosition(position).toString()
-            
+            findViewById<LinearLayout>(R.id.llDepartmentContainer).setBackgroundResource(R.drawable.input_field_bg_rounded)
             // Clear and update program dropdown
             actProgram.setText("")
             selectedProgram = null
@@ -131,6 +154,127 @@ class CreateAccountActivity : AppCompatActivity() {
             etConfirmPassword.setSelection(etConfirmPassword.text.length)
         }
 
+        etFirstName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.toString().isNotEmpty()) {
+                    findViewById<LinearLayout>(R.id.llFirstNameContainer).setBackgroundResource(R.drawable.input_field_bg_rounded)
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        etLastName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.toString().isNotEmpty()) {
+                    findViewById<LinearLayout>(R.id.llLastNameContainer).setBackgroundResource(R.drawable.input_field_bg_rounded)
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        // Real-time Student ID validation
+        etStudentId.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val input = s.toString()
+                if (input.isEmpty()) {
+                    llStudentIdContainer.setBackgroundResource(R.drawable.input_field_bg_rounded)
+                    tvStudentIdError.visibility = View.GONE
+                    return
+                }
+                
+                val regex = "^\\d{4}-\\d{6}\$".toRegex()
+                if (input.matches(regex)) {
+                    llStudentIdContainer.setBackgroundResource(R.drawable.input_field_bg_success)
+                    tvStudentIdError.visibility = View.GONE
+                } else {
+                    llStudentIdContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                    tvStudentIdError.visibility = View.VISIBLE
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        // Real-time Email validation
+        etEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val input = s.toString()
+                if (input.isEmpty()) {
+                    llEmailContainer.setBackgroundResource(R.drawable.input_field_bg_rounded)
+                    tvEmailError.visibility = View.GONE
+                    return
+                }
+                
+                if (input.endsWith("@students.nu-dasma.edu.ph")) {
+                    llEmailContainer.setBackgroundResource(R.drawable.input_field_bg_success)
+                    tvEmailError.visibility = View.GONE
+                } else {
+                    llEmailContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                    tvEmailError.visibility = View.VISIBLE
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        // Real-time password validation
+        etPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val password = s.toString()
+                
+                if (password.isEmpty()) {
+                    llRequirementsContainer.visibility = View.GONE
+                    llPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_rounded)
+                    return
+                }
+                
+                llRequirementsContainer.visibility = View.VISIBLE
+                
+                // Length check (8 characters minimum)
+                val isLengthValid = password.length >= 8
+                updateRequirementUI(tvRequirementLength, isLengthValid, "8 characters minimum")
+                
+                // Alphabet check
+                val isAlphabetValid = password.any { it.isLetter() }
+                updateRequirementUI(tvRequirementAlphabet, isAlphabetValid, "One alphabet letter")
+                
+                // Number check
+                val isNumberValid = password.any { it.isDigit() }
+                updateRequirementUI(tvRequirementNumber, isNumberValid, "One number")
+                
+                // Special character check
+                val isSpecialValid = password.any { !it.isLetterOrDigit() }
+                updateRequirementUI(tvRequirementSpecial, isSpecialValid, "One special character")
+                
+                // Update container border
+                val isAllValid = isLengthValid && isAlphabetValid && isNumberValid && isSpecialValid
+                if (isAllValid) {
+                    llPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_success)
+                } else {
+                    llPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                }
+                
+                // Re-validate match if confirm password is not empty
+                if (etConfirmPassword.text.isNotEmpty()) {
+                    validatePasswordMatch(password, etConfirmPassword.text.toString(), tvRequirementMatch, llConfirmPasswordContainer)
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        etConfirmPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val confirmPassword = s.toString()
+                tvRequirementMatch.visibility = if (confirmPassword.isEmpty()) View.GONE else View.VISIBLE
+                validatePasswordMatch(etPassword.text.toString(), confirmPassword, tvRequirementMatch, llConfirmPasswordContainer)
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         setupTermsAndConditions(tvTerms)
 
         btnCreateAccount.setOnClickListener {
@@ -143,40 +287,77 @@ class CreateAccountActivity : AppCompatActivity() {
             val password = etPassword.text.toString()
             val confirmPassword = etConfirmPassword.text.toString()
 
-            if (firstName.isEmpty()) {
-                showCustomDialog("Missing Details", "Please provide your first name.", R.drawable.ic_person)
+            // 1. Check for empty fields first and show a general dialog
+            if (firstName.isEmpty() || lastName.isEmpty() || studentId.isEmpty() ||
+                department.isEmpty() || program.isEmpty() || email.isEmpty() ||
+                password.isEmpty() || confirmPassword.isEmpty()) {
+
+                // Show general error dialog
+                showCustomDialog("Incomplete Details", "Please fill all required fields to proceed.", R.drawable.ic_close)
+
+                // Highlight empty fields with red borders, but keep detailed error messages hidden if they were empty
+                if (firstName.isEmpty()) findViewById<LinearLayout>(R.id.llFirstNameContainer).setBackgroundResource(R.drawable.input_field_bg_error)
+                if (lastName.isEmpty()) findViewById<LinearLayout>(R.id.llLastNameContainer).setBackgroundResource(R.drawable.input_field_bg_error)
+                if (studentId.isEmpty()) {
+                    llStudentIdContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                    tvStudentIdError.visibility = View.GONE // Don't show "Invalid format" yet
+                }
+                if (department.isEmpty()) findViewById<LinearLayout>(R.id.llDepartmentContainer).setBackgroundResource(R.drawable.input_field_bg_error)
+                if (program.isEmpty()) findViewById<LinearLayout>(R.id.llProgramContainer).setBackgroundResource(R.drawable.input_field_bg_error)
+                if (email.isEmpty()) {
+                    llEmailContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                    tvEmailError.visibility = View.GONE // Don't show "Please use official email" yet
+                }
+                if (password.isEmpty()) {
+                    llPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                    llRequirementsContainer.visibility = View.GONE // Don't show requirements yet
+                }
+                if (confirmPassword.isEmpty()) {
+                    llConfirmPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                    tvRequirementMatch.visibility = View.GONE // Don't show match status yet
+                }
+
                 return@setOnClickListener
             }
-            if (lastName.isEmpty()) {
-                showCustomDialog("Missing Details", "Please provide your last name.", R.drawable.ic_person)
-                return@setOnClickListener
+
+            // 2. If all fields are filled, perform detailed validation
+            var isAllValid = true
+
+            val studentIdRegex = "^\\d{4}-\\d{6}\$".toRegex()
+            if (!studentId.matches(studentIdRegex)) {
+                llStudentIdContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                tvStudentIdError.visibility = View.VISIBLE
+                isAllValid = false
             }
-            if (studentId.isEmpty()) {
-                showCustomDialog("Missing Details", "Please provide your NU student ID.", R.drawable.ic_id_card)
-                return@setOnClickListener
+
+            if (!email.endsWith("@students.nu-dasma.edu.ph")) {
+                llEmailContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                tvEmailError.visibility = View.VISIBLE
+                isAllValid = false
             }
-            if (department.isEmpty()) {
-                showCustomDialog("Missing Details", "Please select your department.", R.drawable.ic_department)
-                return@setOnClickListener
+
+            // Password complexity check
+            val isLengthValid = password.length >= 8
+            val isAlphabetValid = password.any { it.isLetter() }
+            val isNumberValid = password.any { it.isDigit() }
+            val isSpecialValid = password.any { !it.isLetterOrDigit() }
+            
+            if (!isLengthValid || !isAlphabetValid || !isNumberValid || !isSpecialValid) {
+                llPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                llRequirementsContainer.visibility = View.VISIBLE
+                isAllValid = false
             }
-            if (program.isEmpty()) {
-                showCustomDialog("Missing Details", "Please select your program.", R.drawable.ic_program)
-                return@setOnClickListener
-            }
-            if (email.isEmpty()) {
-                showCustomDialog("Missing Details", "Please provide your NU email.", R.drawable.ic_email)
-                return@setOnClickListener
-            }
-            if (password.isEmpty()) {
-                showCustomDialog("Insecure Password", "Please provide a password.", R.drawable.ic_lock)
-                return@setOnClickListener
-            }
+
             if (password != confirmPassword) {
-                showCustomDialog("Passwords Don't Match", "Please make sure your passwords match.", R.drawable.ic_lock)
-                return@setOnClickListener
+                llConfirmPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                tvRequirementMatch.visibility = View.VISIBLE
+                isAllValid = false
             }
+
+            if (!isAllValid) return@setOnClickListener
+
             if (!cbTerms.isChecked) {
-                showCustomDialog("Terms & Conditions", "Please accept the Terms & Conditions and Privacy Policy to proceed.", R.drawable.ic_check_circle)
+                showCustomDialog("Terms & Conditions", "Please accept the Terms & Conditions and Privacy Policy to proceed.", R.drawable.ic_close)
                 return@setOnClickListener
             }
 
@@ -184,6 +365,35 @@ class CreateAccountActivity : AppCompatActivity() {
             showCustomDialog("Success", "Account created successfully", R.drawable.ic_check_circle) {
                 finish()
             }
+        }
+    }
+
+    private fun updateRequirementUI(textView: TextView, isValid: Boolean, label: String) {
+        if (isValid) {
+            textView.text = "✓ $label"
+            textView.setTextColor(Color.parseColor("#4CAF50"))
+        } else {
+            textView.text = "✕ $label"
+            textView.setTextColor(Color.parseColor("#FF5252"))
+        }
+    }
+
+    private fun validatePasswordMatch(password: String, confirm: String, textView: TextView, container: LinearLayout) {
+        if (confirm.isEmpty()) {
+            container.setBackgroundResource(R.drawable.input_field_bg_rounded)
+            textView.visibility = View.GONE
+            return
+        }
+        
+        textView.visibility = View.VISIBLE
+        if (password == confirm) {
+            textView.text = "✓ Passwords Match"
+            textView.setTextColor(Color.parseColor("#4CAF50"))
+            container.setBackgroundResource(R.drawable.input_field_bg_success)
+        } else {
+            textView.text = "✕ Passwords Match"
+            textView.setTextColor(Color.parseColor("#FF5252"))
+            container.setBackgroundResource(R.drawable.input_field_bg_error)
         }
     }
 
@@ -227,19 +437,73 @@ class CreateAccountActivity : AppCompatActivity() {
     }
 
     private fun showTermsDialog() {
-        showCustomDialog(
-            "Terms & Conditions",
-            "By using ReNUnite, you agree to: \n\n1. Use the app for legitimate lost and found reporting.\n2. Not post false or misleading information.\n3. Respect other users' privacy.\n4. Abide by NU Dasmariñas student code of conduct.",
-            R.drawable.ic_program
-        )
+        val builder = SpannableStringBuilder()
+        
+        appendBold(builder, "1. Acceptance of Terms\n")
+        builder.append("By accessing or using ReNUnite, you acknowledge that you have read, understood, and agreed to comply with these Terms and Conditions and this User Agreement.\n\n")
+        
+        appendBold(builder, "2. Purpose of the Platform\n")
+        builder.append("ReNUnite is a lost and found platform developed for students of National University Dasmariñas. It provides a secure, efficient, and confidential digital space for students to:\n" +
+            "• Report lost items\n" +
+            "• Report found items\n" +
+            "• Facilitate item recovery\n\n")
+        
+        appendBold(builder, "3. User Eligibility\n")
+        builder.append("ReNUnite is accessible exclusively to currently enrolled NU Dasmariñas students. All users must log in using their official NU email address and Student ID.\n\n")
+        
+        appendBold(builder, "4. Proper Use of the Platform\n")
+        builder.append("Users agree to provide accurate, truthful, and verifiable information during registration and submission. Users must not:\n" +
+            "• Submit false or misleading reports\n" +
+            "• Use the platform for personal disputes\n" +
+            "• Attempt to exploit the system")
+
+        showFormalDialog("Terms and Conditions and User Agreement", builder)
     }
 
     private fun showPrivacyDialog() {
-        showCustomDialog(
-            "Privacy Policy",
-            "ReNUnite collects your NU student ID, email, and name to facilitate item recovery. We do not share your data with third parties. Your data is stored securely and used solely for campus-related item matching.",
-            R.drawable.ic_email
-        )
+        val builder = SpannableStringBuilder()
+        
+        appendBold(builder, "1. Data Collection\n")
+        builder.append("ReNUnite strictly adheres to the Data Privacy Act of 2012 (R.A. 10173). We collect only necessary and relevant information for item recovery, including:\n" +
+            "• Basic user details (Name, NU Email, Student ID)\n" +
+            "• Details of reported lost/found items\n\n")
+        
+        appendBold(builder, "2. Purpose of Collection\n")
+        builder.append("Data is collected to:\n" +
+            "• Verify user identity\n" +
+            "• Facilitate efficient item matching\n" +
+            "• Maintain accountability in item handling\n\n")
+        
+        appendBold(builder, "3. Data Protection\n")
+        builder.append("Your data is stored securely and used solely for campus-related item matching. We do not share your personal information with third parties without your consent.")
+
+        showFormalDialog("Privacy Policy", builder)
+    }
+    
+    private fun appendBold(builder: SpannableStringBuilder, text: String) {
+        val start = builder.length
+        builder.append(text)
+        builder.setSpan(StyleSpan(Typeface.BOLD), start, builder.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+    }
+
+    private fun showFormalDialog(title: String, message: CharSequence) {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_terms_privacy)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        
+        val tvTitle = dialog.findViewById<TextView>(R.id.tvDialogTitle)
+        val tvMessage = dialog.findViewById<TextView>(R.id.tvDialogMessage)
+        val ivClose = dialog.findViewById<ImageView>(R.id.ivClose)
+        val btnPositive = dialog.findViewById<MaterialButton>(R.id.btnPositive)
+
+        tvTitle.text = title
+        tvMessage.text = message
+
+        ivClose.setOnClickListener { dialog.dismiss() }
+        btnPositive.setOnClickListener { dialog.dismiss() }
+
+        dialog.show()
     }
 
     private fun showCustomDialog(title: String, message: String, iconRes: Int, onPositiveClick: (() -> Unit)? = null) {
@@ -271,17 +535,19 @@ class CreateAccountActivity : AppCompatActivity() {
     }
 
     private fun setupProgramDropdown(actProgram: AutoCompleteTextView) {
-        val programs = if (selectedDepartment != null) {
-            programsMap[selectedDepartment] ?: arrayOf()
+        val currentDepartment = selectedDepartment
+        val programs = if (currentDepartment != null) {
+            programsMap[currentDepartment] ?: emptyArray()
         } else {
-            arrayOf()
+            emptyArray()
         }
 
         val programAdapter = ArrayAdapter(this, R.layout.dropdown_item, programs)
         actProgram.setAdapter(programAdapter)
-        
+
         actProgram.setOnItemClickListener { parent, _, position, _ ->
             selectedProgram = parent.getItemAtPosition(position).toString()
+            findViewById<LinearLayout>(R.id.llProgramContainer).setBackgroundResource(R.drawable.input_field_bg_rounded)
         }
     }
 }

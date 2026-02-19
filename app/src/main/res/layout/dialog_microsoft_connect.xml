@@ -9,55 +9,47 @@
     android:orientation="vertical"
     android:padding="24dp">
 
-    <!-- Icon Frame -->
-    <FrameLayout
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="end"
+        android:src="@drawable/ic_close"
+        app:tint="#94A3B8" />
+
+    <ImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/bg_pop_up_icon"
-        android:elevation="4dp">
-
-        <ImageView
-            android:id="@+id/ivDialogIcon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_close"
-            app:tint="@color/white" />
-    </FrameLayout>
+        android:src="@drawable/ic_microsoft" />
 
     <TextView
-        android:id="@+id/tvDialogTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="Cancel Report?"
+        android:text="Connect with Microsoft"
         android:textColor="#4361B5"
         android:textSize="22sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tvDialogMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Are you sure you want to cancel this report? This action cannot be undone."
+        android:lineSpacingExtra="4dp"
+        android:text="Use your NU Microsoft account to securely sign in to ReNUnite. This ensures a faster and verified experience."
         android:textColor="#6A7DC8"
-        android:textSize="15sp"
-        android:lineSpacingExtra="4dp" />
+        android:textSize="15sp" />
 
-    <!-- Choice Buttons -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnConfirmCancel"
+        android:id="@+id/btnContinueMicrosoft"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:backgroundTint="#FF5252"
-        android:text="Yes, Cancel Report"
+        android:backgroundTint="#6499FF"
+        android:text="Continue with Microsoft"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -66,17 +58,13 @@
         app:cornerRadius="32dp"
         app:elevation="4dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnKeepReport"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="No, Keep It"
-        android:textAllCaps="false"
-        android:textColor="#4361B5"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:letterSpacing="0" />
+        android:layout_marginTop="16dp"
+        android:text="By continuing, you agree to our Terms of Service"
+        android:textColor="#94A3B8"
+        android:textSize="12sp"
+        android:textStyle="italic" />
 
 </LinearLayout>

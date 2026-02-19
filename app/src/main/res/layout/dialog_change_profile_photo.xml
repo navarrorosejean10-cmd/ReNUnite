@@ -22,7 +22,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_close"
+            android:src="@drawable/ic_add_photo"
             app:tint="@color/white" />
     </FrameLayout>
 
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="Cancel Report?"
+        android:text="Change Photo"
         android:textColor="#4361B5"
         android:textSize="22sp"
         android:textStyle="bold" />
@@ -43,21 +43,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Are you sure you want to cancel this report? This action cannot be undone."
+        android:text="Choose how you want to update your profile photo"
         android:textColor="#6A7DC8"
         android:textSize="15sp"
         android:lineSpacingExtra="4dp" />
 
     <!-- Choice Buttons -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnConfirmCancel"
+        android:id="@+id/btnTakePhoto"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:backgroundTint="#FF5252"
-        android:text="Yes, Cancel Report"
+        android:backgroundTint="#6499FF"
+        android:text="Take Photo"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -67,12 +67,30 @@
         app:elevation="4dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnKeepReport"
+        android:id="@+id/btnChooseGallery"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:backgroundTint="#6499FF"
+        android:text="Choose from Gallery"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:letterSpacing="0"
+        app:cornerRadius="32dp"
+        app:elevation="4dp" />
+
+    <!-- Cancel Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancelPhoto"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="No, Keep It"
+        android:text="Cancel"
         android:textAllCaps="false"
         android:textColor="#4361B5"
         android:textSize="18sp"
