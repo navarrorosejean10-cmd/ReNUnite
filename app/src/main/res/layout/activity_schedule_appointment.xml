@@ -6,41 +6,41 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_app">
 
-    <!-- Header: Back Arrow -->
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_back_arrow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="#3D3E9B" />
-
     <ScrollView
-        android:layout_width="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:fillViewport="false"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBack">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="24dp"
-            android:paddingBottom="32dp">
+            android:paddingBottom="48dp">
+
+            <!-- Header: Back Arrow moved inside for full-screen scrolling -->
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="56dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_back_arrow"
+                app:tint="#3D3E9B" />
 
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="24dp"
                 android:text="Schedule Appointment"
                 android:textColor="#3D3E9B"
@@ -101,6 +101,7 @@
 
             <!-- Select Date Section -->
             <LinearLayout
+                android:id="@+id/llDateContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -147,8 +148,25 @@
                 </GridLayout>
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tvDateError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="16dp"
+                android:text="Please select a date"
+                android:textColor="#FF5252"
+                android:textSize="13sp"
+                android:textStyle="italic"
+                android:shadowColor="#FFFFFFFF"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:visibility="gone" />
+
             <!-- Select Time Section -->
             <LinearLayout
+                android:id="@+id/llTimeContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -194,12 +212,28 @@
                 </GridLayout>
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tvTimeError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="16dp"
+                android:text="Please select a time"
+                android:textColor="#FF5252"
+                android:textSize="13sp"
+                android:textStyle="italic"
+                android:shadowColor="#FFFFFFFF"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:visibility="gone" />
+
             <!-- Reminder Card -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/input_field_bg"
                 android:backgroundTint="#FFF5CC"
                 android:gravity="center_vertical"
@@ -226,35 +260,40 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
-                <androidx.appcompat.widget.AppCompatButton
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCancel"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
+                    android:layout_height="64dp"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:background="@drawable/input_field_bg"
-                    android:backgroundTint="#D1E2FF"
                     android:text="Cancel"
                     android:textAllCaps="false"
                     android:textColor="#3D3E9B"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:backgroundTint="#D1E2FF"
+                    android:letterSpacing="0"
+                    app:cornerRadius="32dp" />
 
-                <androidx.appcompat.widget.AppCompatButton
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnConfirm"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_btn_primary"
-                    android:elevation="4dp"
                     android:text="Confirm"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:backgroundTint="#6699FF"
+                    app:cornerRadius="32dp"
+                    android:letterSpacing="0"
+                    app:elevation="4dp" />
             </LinearLayout>
 
         </LinearLayout>

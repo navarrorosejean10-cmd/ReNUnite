@@ -46,17 +46,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
+    <!-- Search Bar -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvSearch"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="2dp"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_search"
+                app:tint="#4361B5" />
+
+            <EditText
+                android:id="@+id/etSearchReports"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="Search your reports..."
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:textColor="#4361B5"
+                android:textColorHint="#A0ACCF"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/ivClearSearchReports"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:padding="4dp"
+                android:src="@drawable/ic_close"
+                android:visibility="gone"
+                app:tint="#4361B5"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
     <!-- Toggle Selector -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cvToggle"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="28dp"
         app:cardElevation="2dp"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
+        app:layout_constraintTop_toBottomOf="@id/cvSearch">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,8 +122,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/input_field_bg"
-                android:backgroundTint="#6A9EF8"
+                android:background="@drawable/bg_btn_primary"
                 android:gravity="center"
                 android:text="Lost Items"
                 android:textColor="#FFFFFF"
@@ -89,21 +141,102 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- Status Filter (Horizontal Scroll) -->
+    <HorizontalScrollView
+        android:id="@+id/hsvStatusFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/cvToggle">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp">
+
+            <TextView
+                android:id="@+id/filterAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_category_selected"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="All"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/filterPending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_category_unselected"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="Pending"
+                android:textColor="#6A9EF8"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/filterMatching"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_category_unselected"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="Matching"
+                android:textColor="#6A9EF8"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/filterVerified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_category_unselected"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="Verified"
+                android:textColor="#6A9EF8"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/filterClaimed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_category_unselected"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="Claimed"
+                android:textColor="#6A9EF8"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:fillViewport="true"
+        android:clipToPadding="false"
+        android:clipChildren="false"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cvToggle">
+        app:layout_constraintTop_toBottomOf="@id/hsvStatusFilter">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="24dp"
-            android:paddingBottom="40dp">
+            android:paddingBottom="40dp"
+            android:clipToPadding="false"
+            android:clipChildren="false">
 
             <!-- Lost Items List -->
             <LinearLayout
@@ -113,121 +246,23 @@
                 android:orientation="vertical"
                 android:visibility="visible">
 
-                <!-- Lost Item 1 -->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardLostItem1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="32dp"
-                    app:cardElevation="2dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_item"
-                        android:orientation="horizontal"
-                        android:padding="12dp">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="84dp"
-                            android:layout_height="84dp"
-                            app:cardCornerRadius="20dp"
-                            app:cardElevation="0dp">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/ic_category_bags" />
-                        </androidx.cardview.widget.CardView>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Black Wallet"
-                                    android:textColor="#1A1A1A"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/input_field_bg"
-                                    android:backgroundTint="#FFF8E1"
-                                    android:paddingHorizontal="10dp"
-                                    android:paddingVertical="4dp"
-                                    android:text="pending"
-                                    android:textColor="#FFA000"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="Leather wallet with credit cards"
-                                android:textColor="#666666"
-                                android:textSize="14sp" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="6dp"
-                                android:gravity="center_vertical">
-                                <ImageView
-                                    android:layout_width="14dp"
-                                    android:layout_height="14dp"
-                                    android:src="@drawable/ic_calendar"
-                                    app:tint="#6A9EF8" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="6dp"
-                                    android:text="2024-04-10"
-                                    android:textColor="#999999"
-                                    android:textSize="12sp" />
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <!-- Lost Item 2 -->
+                <!-- Lost Item 1: iPhone 13 -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardLostItem2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="32dp"
-                    app:cardElevation="2dp">
-
+                    android:layout_marginBottom="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_item"
-                        android:orientation="horizontal"
                         android:padding="12dp">
-
                         <androidx.cardview.widget.CardView
-                            android:layout_width="84dp"
-                            android:layout_height="84dp"
-                            app:cardCornerRadius="20dp"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            app:cardCornerRadius="12dp"
                             app:cardElevation="0dp">
                             <ImageView
                                 android:layout_width="match_parent"
@@ -235,67 +270,147 @@
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/img_iphone" />
                         </androidx.cardview.widget.CardView>
-
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="12dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
                                 android:orientation="horizontal">
-
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="iPhone 13"
                                     android:textColor="#1A1A1A"
-                                    android:textSize="16sp"
+                                    android:textSize="15sp"
                                     android:textStyle="bold" />
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@drawable/input_field_bg"
+                                    android:background="@drawable/bg_verified_badge"
                                     android:backgroundTint="#E3F2FD"
-                                    android:paddingHorizontal="10dp"
-                                    android:paddingVertical="4dp"
-                                    android:text="matching"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="2dp"
+                                    android:text="Matching"
                                     android:textColor="#1E88E5"
                                     android:textSize="10sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
-
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="Blue iPhone 13 with clear case"
+                                android:layout_marginTop="4dp"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:text="Blue iPhone 13 with clear case and NU sticker."
                                 android:textColor="#666666"
-                                android:textSize="14sp" />
-
+                                android:textSize="13sp" />
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="6dp"
+                                android:layout_marginTop="4dp"
                                 android:gravity="center_vertical">
                                 <ImageView
-                                    android:layout_width="14dp"
-                                    android:layout_height="14dp"
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
                                     android:src="@drawable/ic_calendar"
-                                    app:tint="#6A9EF8" />
+                                    app:tint="#A0ACCF" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="6dp"
+                                    android:layout_marginStart="4dp"
                                     android:text="2024-04-12"
-                                    android:textColor="#999999"
-                                    android:textSize="12sp" />
+                                    android:textColor="#A0ACCF"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Lost Item 2: Blue Student ID -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardLostItem3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_item"
+                        android:padding="12dp">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/img_blue_id" />
+                        </androidx.cardview.widget.CardView>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Blue Student ID"
+                                    android:textColor="#1A1A1A"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_verified_badge"
+                                    android:backgroundTint="#FFF8E1"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="2dp"
+                                    android:text="Pending"
+                                    android:textColor="#FFA000"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:text="NU Dasmariñas student ID with blue lanyard."
+                                android:textColor="#666666"
+                                android:textSize="13sp" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:gravity="center_vertical">
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:src="@drawable/ic_calendar"
+                                    app:tint="#A0ACCF" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
+                                    android:text="2024-04-14"
+                                    android:textColor="#A0ACCF"
+                                    android:textSize="11sp" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -310,27 +425,108 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <!-- Found Item 1 -->
+                <!-- Found Item 1: Blue Backpack -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardFoundItem1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="32dp"
-                    app:cardElevation="2dp">
-
+                    android:layout_marginBottom="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_item"
-                        android:orientation="horizontal"
                         android:padding="12dp">
-
                         <androidx.cardview.widget.CardView
-                            android:layout_width="84dp"
-                            android:layout_height="84dp"
-                            app:cardCornerRadius="20dp"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/img_backpack" />
+                        </androidx.cardview.widget.CardView>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Blue Backpack"
+                                    android:textColor="#1A1A1A"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_verified_badge"
+                                    android:backgroundTint="#E8F5E9"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="2dp"
+                                    android:text="Verified"
+                                    android:textColor="#43A047"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:text="Navy blue Jansport backpack found near canteen."
+                                android:textColor="#666666"
+                                android:textSize="13sp" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:gravity="center_vertical">
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:src="@drawable/ic_calendar"
+                                    app:tint="#6A9EF8" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
+                                    android:text="2024-04-15"
+                                    android:textColor="#999999"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Found Item 2: Red Water Bottle -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardFoundItem2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_item"
+                        android:padding="12dp">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            app:cardCornerRadius="12dp"
                             app:cardElevation="0dp">
                             <ImageView
                                 android:layout_width="match_parent"
@@ -338,65 +534,60 @@
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/img_red_bottle" />
                         </androidx.cardview.widget.CardView>
-
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="12dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
                                 android:orientation="horizontal">
-
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Blue Backpack"
+                                    android:text="Red Water Bottle"
                                     android:textColor="#1A1A1A"
-                                    android:textSize="16sp"
+                                    android:textSize="15sp"
                                     android:textStyle="bold" />
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@drawable/input_field_bg"
-                                    android:backgroundTint="#E8F5E9"
-                                    android:paddingHorizontal="10dp"
-                                    android:paddingVertical="4dp"
-                                    android:text="verified"
-                                    android:textColor="#43A047"
+                                    android:background="@drawable/bg_verified_badge"
+                                    android:backgroundTint="#E8F9EE"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="2dp"
+                                    android:text="Claimed"
+                                    android:textColor="#2ECC71"
                                     android:textSize="10sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
-
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="Navy blue Jansport backpack"
+                                android:layout_marginTop="4dp"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:text="Insulated red water bottle with NU sticker."
                                 android:textColor="#666666"
-                                android:textSize="14sp" />
-
+                                android:textSize="13sp" />
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="6dp"
+                                android:layout_marginTop="4dp"
                                 android:gravity="center_vertical">
                                 <ImageView
-                                    android:layout_width="14dp"
-                                    android:layout_height="14dp"
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
                                     android:src="@drawable/ic_calendar"
                                     app:tint="#6A9EF8" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="6dp"
-                                    android:text="2024-04-15"
+                                    android:layout_marginStart="4dp"
+                                    android:text="2024-04-16"
                                     android:textColor="#999999"
                                     android:textSize="12sp" />
                             </LinearLayout>

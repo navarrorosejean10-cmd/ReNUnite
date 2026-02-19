@@ -36,7 +36,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         btnSecurityPassword.setOnClickListener {
-            val intent = Intent(this, SecurityPasswordActivity::class.java)
+            val intent = Intent(this, AccountSettingsActivity::class.java)
             startActivity(intent)
         }
 

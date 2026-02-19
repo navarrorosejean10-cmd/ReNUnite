@@ -289,8 +289,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@drawable/input_field_bg"
-                                    android:backgroundTint="#2ECC71"
+                                    android:background="@drawable/bg_verified_badge"
                                     android:paddingHorizontal="8dp"
                                     android:paddingVertical="2dp"
                                     android:text="Verified"
@@ -372,13 +371,29 @@
                             android:layout_marginStart="12dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="iPhone 13 Pro"
-                                android:textColor="#1A1A1A"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="iPhone 13 Pro"
+                                    android:textColor="#1A1A1A"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_verified_badge"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="2dp"
+                                    android:text="Verified"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -388,6 +403,37 @@
                                 android:text="Black iPhone 13 Pro with cracked screen protector."
                                 android:textColor="#666666"
                                 android:textSize="13sp" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:gravity="center_vertical">
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:src="@drawable/ic_location"
+                                    app:tint="#A0ACCF" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
+                                    android:text="Admin Office"
+                                    android:textColor="#A0ACCF"
+                                    android:textSize="11sp" />
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_marginStart="12dp"
+                                    android:src="@drawable/ic_calendar"
+                                    app:tint="#A0ACCF" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
+                                    android:text="2025-02-12"
+                                    android:textColor="#A0ACCF"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -422,13 +468,29 @@
                             android:layout_marginStart="12dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Red Water Bottle"
-                                android:textColor="#1A1A1A"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Red Water Bottle"
+                                    android:textColor="#1A1A1A"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_verified_badge"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="2dp"
+                                    android:text="Verified"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -438,6 +500,37 @@
                                 android:text="Insulated red water bottle with NU sticker."
                                 android:textColor="#666666"
                                 android:textSize="13sp" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:gravity="center_vertical">
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:src="@drawable/ic_location"
+                                    app:tint="#A0ACCF" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
+                                    android:text="Canteen"
+                                    android:textColor="#A0ACCF"
+                                    android:textSize="11sp" />
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_marginStart="12dp"
+                                    android:src="@drawable/ic_calendar"
+                                    app:tint="#A0ACCF" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
+                                    android:text="2025-02-13"
+                                    android:textColor="#A0ACCF"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -472,13 +565,29 @@
                             android:layout_marginStart="12dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Black Backpack"
-                                android:textColor="#1A1A1A"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Black Backpack"
+                                    android:textColor="#1A1A1A"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_verified_badge"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="2dp"
+                                    android:text="Verified"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -488,6 +597,37 @@
                                 android:text="Black JanSport backpack with laptop compartment."
                                 android:textColor="#666666"
                                 android:textSize="13sp" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:gravity="center_vertical">
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:src="@drawable/ic_location"
+                                    app:tint="#A0ACCF" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
+                                    android:text="Gymnasium"
+                                    android:textColor="#A0ACCF"
+                                    android:textSize="11sp" />
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:layout_marginStart="12dp"
+                                    android:src="@drawable/ic_calendar"
+                                    app:tint="#A0ACCF" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="4dp"
+                                    android:text="2025-02-14"
+                                    android:textColor="#A0ACCF"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

@@ -47,7 +47,7 @@ class ItemDetailsActivity : AppCompatActivity() {
             btnAction.text = "Request Claim"
         }
 
-        var itemImageResId = 0
+        var itemImageResId = R.drawable.img_backpack // Default
         // Dummy data mapping
         when (itemName) {
             "Blue Student ID" -> {
@@ -88,23 +88,21 @@ class ItemDetailsActivity : AppCompatActivity() {
             finish()
         }
 
-        // --- FIXED NAVIGATION FLOW ---
         btnAction.setOnClickListener {
             if ("FOUND".equals(flowType, ignoreCase = true)) {
-                // Navigate to Item Confirmation for the FOUND flow
-                val intent = Intent(this, ItemConfirmationActivity::class.java)
-                intent.putExtra("ITEM_NAME", itemName)
-                intent.putExtra("ITEM_DESC", tvItemDescription.text.toString())
-                intent.putExtra("ITEM_LOC", tvItemLocation.text.toString())
-                intent.putExtra("ITEM_IMAGE", itemImageResId)
-                startActivity(intent)
-                // Don't finish() here if we want back stack, but usually confirmation is a final step
-                // finish()
+                val nextIntent = Intent(this, ItemConfirmationActivity::class.java).apply {
+                    putExtra("ITEM_NAME", itemName)
+                    putExtra("ITEM_DESC", tvItemDescription.text.toString())
+                    putExtra("ITEM_LOC", tvItemLocation.text.toString())
+                    putExtra("ITEM_IMAGE", itemImageResId)
+                }
+                startActivity(nextIntent)
+                finish() // Closes current activity so back goes to the list or home
             } else {
-                // Navigate to Claim Request for the LOST flow
-                val intent = Intent(this, ClaimRequestActivity::class.java)
-                intent.putExtra("ITEM_NAME", itemName)
-                startActivity(intent)
+                val nextIntent = Intent(this, ClaimRequestActivity::class.java).apply {
+                    putExtra("ITEM_NAME", itemName)
+                }
+                startActivity(nextIntent)
             }
         }
     }
@@ -114,7 +112,7 @@ class ItemDetailsActivity : AppCompatActivity() {
         val inflater = LayoutInflater.from(this)
         keywords.forEach { keyword ->
             val chip = inflater.inflate(R.layout.item_keyword_tag, chipGroup, false) as TextView
-            chip.text = if (keyword.startsWith("+")) keyword else "+ $keyword"
+            chip.text = keyword
             chipGroup.addView(chip)
         }
     }

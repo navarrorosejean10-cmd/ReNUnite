@@ -2,7 +2,6 @@ package com.example.renunite
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -22,11 +21,9 @@ class ItemConfirmationActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tvConfirmedItemDesc).text = itemDesc
         findViewById<TextView>(R.id.tvConfirmedItemLoc).text = itemLoc
         findViewById<ImageView>(R.id.ivConfirmedItemImage).setImageResource(itemImage)
-
-        val btnBack = findViewById<ImageButton>(R.id.btnBack)
-        btnBack.setOnClickListener {
-            finish()
-        }
+        
+        // Optional: Update the extra info field if needed
+        findViewById<TextView>(R.id.tvConfirmedItemExtra).text = "Location: $itemLoc"
 
         findViewById<AppCompatButton>(R.id.btnBackToHome).setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
@@ -37,6 +34,7 @@ class ItemConfirmationActivity : AppCompatActivity() {
 
         findViewById<AppCompatButton>(R.id.btnViewReports).setOnClickListener {
             val intent = Intent(this, MyReportsActivity::class.java)
+            intent.putExtra("FROM_CONFIRMATION", true)
             startActivity(intent)
             finish()
         }

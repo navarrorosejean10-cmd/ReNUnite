@@ -1,26 +1,30 @@
 package com.example.renunite
 
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.TypedValue
 import android.view.View
 import android.view.Window
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.switchmaterial.SwitchMaterial
 
-class ResetPasswordActivity : AppCompatActivity() {
+class AccountSettingsActivity : AppCompatActivity() {
 
+    private lateinit var etCurrentPassword: EditText
     private lateinit var etNewPassword: EditText
     private lateinit var etConfirmPassword: EditText
+    private lateinit var llCurrentPasswordContainer: LinearLayout
     private lateinit var llNewPasswordContainer: LinearLayout
     private lateinit var llConfirmPasswordContainer: LinearLayout
     private lateinit var llRequirementsContainer: LinearLayout
@@ -33,14 +37,16 @@ class ResetPasswordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reset_password)
+        setContentView(R.layout.account_settings)
 
-        val btnBack = findViewById<ImageView>(R.id.btnBack)
-        val btnResetPassword = findViewById<MaterialButton>(R.id.btnResetPassword)
+        val btnBack = findViewById<ImageButton>(R.id.btnBack)
+        val btnUpdatePassword = findViewById<MaterialButton>(R.id.btnUpdatePassword)
         
+        etCurrentPassword = findViewById(R.id.etCurrentPassword)
         etNewPassword = findViewById(R.id.etNewPassword)
         etConfirmPassword = findViewById(R.id.etConfirmPassword)
         
+        llCurrentPasswordContainer = findViewById(R.id.llCurrentPasswordContainer)
         llNewPasswordContainer = findViewById(R.id.llNewPasswordContainer)
         llConfirmPasswordContainer = findViewById(R.id.llConfirmPasswordContainer)
         llRequirementsContainer = findViewById(R.id.llRequirementsContainer)
@@ -51,24 +57,31 @@ class ResetPasswordActivity : AppCompatActivity() {
         tvRequirementSpecial = findViewById(R.id.tvRequirementSpecial)
         tvRequirementMatch = findViewById(R.id.tvRequirementMatch)
 
-        val ivToggleNewPassword = findViewById<ImageView>(R.id.ivToggleNewPassword)
-        val ivToggleConfirmPassword = findViewById<ImageView>(R.id.ivToggleConfirmPassword)
+        val ivCurrentPasswordVisibility = findViewById<ImageView>(R.id.ivCurrentPasswordVisibility)
+        val ivNewPasswordVisibility = findViewById<ImageView>(R.id.ivNewPasswordVisibility)
+        val ivConfirmPasswordVisibility = findViewById<ImageView>(R.id.ivConfirmPasswordVisibility)
+
+        val switch2FA = findViewById<SwitchMaterial>(R.id.switch2FA)
+        val switchBiometric = findViewById<SwitchMaterial>(R.id.switchBiometric)
 
         btnBack.setOnClickListener {
             finish()
         }
 
-        var isNewPasswordVisible = false
-        ivToggleNewPassword.setOnClickListener {
-            isNewPasswordVisible = !isNewPasswordVisible
-            togglePasswordVisibility(etNewPassword, ivToggleNewPassword, isNewPasswordVisible)
-        }
+        // Visibility Toggles
+        setupVisibilityToggle(etCurrentPassword, ivCurrentPasswordVisibility)
+        setupVisibilityToggle(etNewPassword, ivNewPasswordVisibility)
+        setupVisibilityToggle(etConfirmPassword, ivConfirmPasswordVisibility)
 
-        var isConfirmPasswordVisible = false
-        ivToggleConfirmPassword.setOnClickListener {
-            isConfirmPasswordVisible = !isConfirmPasswordVisible
-            togglePasswordVisibility(etConfirmPassword, ivToggleConfirmPassword, isConfirmPasswordVisible)
-        }
+        etCurrentPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.toString().isNotEmpty()) {
+                    llCurrentPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_rounded)
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
         // Real-time password validation (New Password)
         etNewPassword.addTextChangedListener(object : TextWatcher {
@@ -78,6 +91,7 @@ class ResetPasswordActivity : AppCompatActivity() {
                 
                 if (password.isEmpty()) {
                     llRequirementsContainer.visibility = View.GONE
+                    llNewPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_rounded)
                     return
                 }
                 
@@ -94,6 +108,13 @@ class ResetPasswordActivity : AppCompatActivity() {
                 
                 val isSpecialValid = password.any { !it.isLetterOrDigit() }
                 updateRequirementUI(tvRequirementSpecial, isSpecialValid, "One special character")
+                
+                val isAllValid = isLengthValid && isAlphabetValid && isNumberValid && isSpecialValid
+                if (isAllValid) {
+                    llNewPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_success)
+                } else {
+                    llNewPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                }
                 
                 if (etConfirmPassword.text.isNotEmpty()) {
                     validatePasswordMatch(password, etConfirmPassword.text.toString())
@@ -112,42 +133,77 @@ class ResetPasswordActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        btnResetPassword.setOnClickListener {
-            val newPassword = etNewPassword.text.toString()
-            val confirmPassword = etConfirmPassword.text.toString()
+        btnUpdatePassword.setOnClickListener {
+            val current = etCurrentPassword.text.toString()
+            val new = etNewPassword.text.toString()
+            val confirm = etConfirmPassword.text.toString()
 
-            if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
-                return@setOnClickListener
+            var isValid = true
+
+            if (current.isEmpty()) {
+                llCurrentPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                isValid = false
             }
 
-            val isLengthValid = newPassword.length >= 8
-            val isAlphabetValid = newPassword.any { it.isLetter() }
-            val isNumberValid = newPassword.any { it.isDigit() }
-            val isSpecialValid = newPassword.any { !it.isLetterOrDigit() }
+            if (new.isEmpty()) {
+                llNewPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                llRequirementsContainer.visibility = View.VISIBLE
+                isValid = false
+            }
+
+            if (confirm.isEmpty()) {
+                llConfirmPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_error)
+                tvRequirementMatch.visibility = View.VISIBLE
+                isValid = false
+            }
+
+            if (!isValid) return@setOnClickListener
+
+            val isLengthValid = new.length >= 8
+            val isAlphabetValid = new.any { it.isLetter() }
+            val isNumberValid = new.any { it.isDigit() }
+            val isSpecialValid = new.any { !it.isLetterOrDigit() }
             
-            if (!isLengthValid || !isAlphabetValid || !isNumberValid || !isSpecialValid || newPassword != confirmPassword) {
+            if (!isLengthValid || !isAlphabetValid || !isNumberValid || !isSpecialValid || new != confirm) {
                 return@setOnClickListener
             }
 
-            // Simulate successful password reset
-            showCustomDialog("Success", "Your password has been reset successfully.", R.drawable.ic_check_circle) {
-                val intent = Intent(this, LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-                finish()
+            showCustomDialog("Success", "Your password has been updated successfully.", R.drawable.ic_check_circle) {
+                clearFields()
+            }
+        }
+
+        // Security Switches Popups
+        switch2FA.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                showCustomDialog("2FA Activated", "Two-Factor Authentication has been enabled for your account.", R.drawable.ic_lock)
+            } else {
+                showCustomDialog("2FA Deactivated", "Two-Factor Authentication has been disabled.", R.drawable.ic_lock)
+            }
+        }
+
+        switchBiometric.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                showCustomDialog("Biometric Enabled", "Biometric login has been activated successfully.", R.drawable.ic_person)
+            } else {
+                showCustomDialog("Biometric Disabled", "Biometric login has been deactivated.", R.drawable.ic_person)
             }
         }
     }
 
-    private fun togglePasswordVisibility(editText: EditText, imageView: ImageView, isVisible: Boolean) {
-        if (isVisible) {
-            editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            imageView.setImageResource(R.drawable.ic_visibility_off)
-        } else {
-            editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            imageView.setImageResource(R.drawable.ic_visibility)
+    private fun setupVisibilityToggle(editText: EditText, imageView: ImageView) {
+        var isVisible = false
+        imageView.setOnClickListener {
+            isVisible = !isVisible
+            if (isVisible) {
+                editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                imageView.setImageResource(R.drawable.ic_visibility_off)
+            } else {
+                editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                imageView.setImageResource(R.drawable.ic_visibility)
+            }
+            editText.setSelection(editText.text.length)
         }
-        editText.setSelection(editText.text.length)
     }
 
     private fun updateRequirementUI(textView: TextView, isValid: Boolean, label: String) {
@@ -162,6 +218,7 @@ class ResetPasswordActivity : AppCompatActivity() {
 
     private fun validatePasswordMatch(password: String, confirm: String) {
         if (confirm.isEmpty()) {
+            llConfirmPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_rounded)
             tvRequirementMatch.visibility = View.GONE
             return
         }
@@ -170,9 +227,11 @@ class ResetPasswordActivity : AppCompatActivity() {
         if (password == confirm) {
             tvRequirementMatch.text = "✓ Passwords Match"
             tvRequirementMatch.setTextColor(Color.parseColor("#4CAF50"))
+            llConfirmPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_success)
         } else {
             tvRequirementMatch.text = "✕ Passwords Match"
             tvRequirementMatch.setTextColor(Color.parseColor("#FF5252"))
+            llConfirmPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_error)
         }
     }
 
@@ -193,7 +252,6 @@ class ResetPasswordActivity : AppCompatActivity() {
         tvTitle.text = title
         tvMessage.text = message
         btnPositive.text = "OK"
-        
         btnNegative.visibility = View.GONE
 
         btnPositive.setOnClickListener {
@@ -202,5 +260,16 @@ class ResetPasswordActivity : AppCompatActivity() {
         }
 
         dialog.show()
+    }
+
+    private fun clearFields() {
+        etCurrentPassword.text.clear()
+        etNewPassword.text.clear()
+        etConfirmPassword.text.clear()
+        llRequirementsContainer.visibility = View.GONE
+        tvRequirementMatch.visibility = View.GONE
+        llCurrentPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_rounded)
+        llNewPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_rounded)
+        llConfirmPasswordContainer.setBackgroundResource(R.drawable.input_field_bg_rounded)
     }
 }

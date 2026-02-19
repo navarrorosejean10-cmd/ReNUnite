@@ -28,6 +28,7 @@ class AppointmentConfirmedActivity : AppCompatActivity() {
 
         findViewById<AppCompatButton>(R.id.btnViewReports).setOnClickListener {
             val intent = Intent(this, MyReportsActivity::class.java)
+            intent.putExtra("FROM_CONFIRMATION", true)
             startActivity(intent)
             finish()
         }

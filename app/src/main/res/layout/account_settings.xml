@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFF">
+    android:background="@drawable/bg_app">
 
     <!-- Header Section -->
     <ImageButton
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Security"
+        android:text="Account Settings"
         android:textColor="#4361B5"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -74,30 +74,43 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
+                android:id="@+id/llCurrentPasswordContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:layout_marginTop="8dp"
-                app:boxBackgroundColor="#FFFFFF"
-                app:boxCornerRadiusBottomEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusTopStart="16dp"
-                app:boxStrokeColor="#5C89FF"
-                app:hintEnabled="false"
-                app:passwordToggleEnabled="true"
-                app:startIconDrawable="@drawable/ic_lock"
-                app:startIconTint="#4361B5">
+                android:background="@drawable/input_field_bg_rounded"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_lock"
+                    app:tint="#4361B5" />
+
+                <EditText
                     android:id="@+id/etCurrentPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:hint="••••••••"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="xxxxxxxx"
                     android:inputType="textPassword"
                     android:textColor="#4361B5"
+                    android:textColorHint="#A0ACCF"
                     android:textSize="15sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/ivCurrentPasswordVisibility"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_visibility"
+                    app:tint="#4361B5" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -108,30 +121,88 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
+                android:id="@+id/llNewPasswordContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:layout_marginTop="8dp"
-                app:boxBackgroundColor="#FFFFFF"
-                app:boxCornerRadiusBottomEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusTopStart="16dp"
-                app:boxStrokeColor="#5C89FF"
-                app:hintEnabled="false"
-                app:passwordToggleEnabled="true"
-                app:startIconDrawable="@drawable/ic_lock"
-                app:startIconTint="#4361B5">
+                android:background="@drawable/input_field_bg_rounded"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_lock"
+                    app:tint="#4361B5" />
+
+                <EditText
                     android:id="@+id/etNewPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:hint="••••••••"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="xxxxxxxx"
                     android:inputType="textPassword"
                     android:textColor="#4361B5"
+                    android:textColorHint="#A0ACCF"
                     android:textSize="15sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/ivNewPasswordVisibility"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_visibility"
+                    app:tint="#4361B5" />
+            </LinearLayout>
+
+            <!-- Password Requirements -->
+            <LinearLayout
+                android:id="@+id/llRequirementsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvRequirementLength"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✕ 8 characters minimum"
+                    android:textColor="#FF5252"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvRequirementAlphabet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="✕ One alphabet letter"
+                    android:textColor="#FF5252"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvRequirementNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="✕ One number"
+                    android:textColor="#FF5252"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvRequirementSpecial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="✕ One special character"
+                    android:textColor="#FF5252"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -142,44 +213,71 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
+                android:id="@+id/llConfirmPasswordContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:layout_marginTop="8dp"
-                app:boxBackgroundColor="#FFFFFF"
-                app:boxCornerRadiusBottomEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusTopStart="16dp"
-                app:boxStrokeColor="#5C89FF"
-                app:hintEnabled="false"
-                app:passwordToggleEnabled="true"
-                app:startIconDrawable="@drawable/ic_lock"
-                app:startIconTint="#4361B5">
+                android:background="@drawable/input_field_bg_rounded"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_lock"
+                    app:tint="#4361B5" />
+
+                <EditText
                     android:id="@+id/etConfirmPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:hint="••••••••"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="xxxxxxxx"
                     android:inputType="textPassword"
                     android:textColor="#4361B5"
+                    android:textColorHint="#A0ACCF"
                     android:textSize="15sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/ivConfirmPasswordVisibility"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_visibility"
+                    app:tint="#4361B5" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvRequirementMatch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="✕ Passwords Match"
+                android:textColor="#FF5252"
+                android:textSize="12sp"
+                android:visibility="gone" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnUpdatePassword"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="40dp"
-                android:backgroundTint="#4361B5"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_btn_primary"
                 android:text="Update Password"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                app:cornerRadius="18dp"
-                app:elevation="4dp" />
+                app:backgroundTint="@null"
+                app:cornerRadius="32dp"
+                app:elevation="4dp"
+                android:insetTop="0dp"
+                android:letterSpacing="0"
+                android:insetBottom="0dp" />
 
             <!-- Additional Security Section -->
             <TextView
@@ -235,6 +333,7 @@
                                 android:textSize="12sp" />
                         </LinearLayout>
                         <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switch2FA"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="false" />
@@ -276,9 +375,10 @@
                                 android:textSize="12sp" />
                         </LinearLayout>
                         <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchBiometric"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="true" />
+                            android:checked="false" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

@@ -61,19 +61,21 @@
 
                 <!-- Email Input Field -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cvEmail"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_marginBottom="12dp"
-                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardBackgroundColor="@android:color/transparent"
                     app:cardCornerRadius="30dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
 
                     <LinearLayout
+                        android:id="@+id/llEmailContainer"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="20dp">
+                        android:paddingHorizontal="20dp"
+                        android:background="@drawable/input_field_bg_rounded">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -96,21 +98,36 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <TextView
+                    android:id="@+id/tvEmailError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="16dp"
+                    android:text="Please use your official NU student email. Valid format: name@students.nu-dasma.edu.ph"
+                    android:textColor="#FF5252"
+                    android:textSize="13sp"
+                    android:textStyle="italic"
+                    android:visibility="gone" />
+
                 <!-- Password Input Field -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cvPassword"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_marginBottom="12dp"
-                    app:cardBackgroundColor="#FFFFFF"
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="@android:color/transparent"
                     app:cardCornerRadius="30dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
 
                     <LinearLayout
+                        android:id="@+id/llPasswordContainer"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="20dp">
+                        android:paddingHorizontal="20dp"
+                        android:background="@drawable/input_field_bg_rounded">
 
                         <ImageView
                             android:layout_width="24dp"
@@ -141,11 +158,23 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/tvPasswordError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="16dp"
+                    android:text="Please enter password"
+                    android:textColor="#FF5252"
+                    android:textSize="13sp"
+                    android:textStyle="italic"
+                    android:visibility="gone" />
+
+                <TextView
                     android:id="@+id/tvForgotPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="12dp"
                     android:text="Forgot Password?"
                     android:textColor="#FFFFFF"

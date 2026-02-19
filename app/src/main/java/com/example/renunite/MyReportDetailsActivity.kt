@@ -2,6 +2,8 @@ package com.example.renunite
 
 import android.app.Activity
 import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +31,7 @@ class MyReportDetailsActivity : AppCompatActivity() {
         val ivItemImage = findViewById<ImageView>(R.id.ivItemImage)
         val tvCurrentStatusLabel = findViewById<TextView>(R.id.tvCurrentStatusLabel)
         val btnCancelReport = findViewById<MaterialButton>(R.id.btnCancelReport)
+        val vStatusIndicator = findViewById<View>(R.id.vStatusIndicator)
 
         btnBack.setOnClickListener {
             finish()
@@ -50,31 +53,44 @@ class MyReportDetailsActivity : AppCompatActivity() {
         tvDate.text = date
         tvStatusBadge.text = status
         ivItemImage.setImageResource(imageRes)
-        tvCurrentStatusLabel.text = when(status.lowercase()) {
-            "pending" -> "Pending Verification"
-            "matching" -> "Potential Match Found"
-            "verified" -> "Item Verified"
-            else -> status
-        }
-
-        // Hide cancel button for found items
-        btnCancelReport.visibility = if (isLost) View.VISIBLE else View.GONE
-
-        // Adjust badge color based on status
+        
+        // Setup status-specific UI
         when (status.lowercase()) {
             "pending" -> {
                 tvStatusBadge.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.status_pending_bg))
                 tvStatusBadge.setTextColor(ContextCompat.getColor(this, R.color.status_pending_text))
+                tvCurrentStatusLabel.text = "Pending Verification"
+                vStatusIndicator.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.status_pending_text))
             }
             "matching" -> {
                 tvStatusBadge.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.status_matching_bg))
                 tvStatusBadge.setTextColor(ContextCompat.getColor(this, R.color.status_matching_text))
+                tvCurrentStatusLabel.text = "Potential Match Found"
+                vStatusIndicator.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.status_matching_text))
             }
             "verified" -> {
                 tvStatusBadge.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.status_verified_bg))
                 tvStatusBadge.setTextColor(ContextCompat.getColor(this, R.color.status_verified_text))
+                tvCurrentStatusLabel.text = "Item Verified"
+                vStatusIndicator.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.status_verified_text))
+            }
+            "claimed" -> {
+                // Style for archived/claimed items
+                tvStatusBadge.text = "Claimed"
+                tvStatusBadge.setBackgroundResource(R.drawable.bg_verified_badge)
+                tvStatusBadge.backgroundTintList = null // Use the gradient from drawable
+                tvStatusBadge.setTextColor(ContextCompat.getColor(this, R.color.white))
+                // Removed the circled check icon as requested
+                tvStatusBadge.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+                
+                tvCurrentStatusLabel.text = "Item Claimed & Archived"
+                // Set status timeline circle color to green as requested
+                vStatusIndicator.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.status_verified_text))
             }
         }
+
+        // Hide cancel button for found items or archived items
+        btnCancelReport.visibility = if (isLost && status.lowercase() != "claimed") View.VISIBLE else View.GONE
 
         btnCancelReport.setOnClickListener {
             showCancelConfirmationDialog()
@@ -83,9 +99,11 @@ class MyReportDetailsActivity : AppCompatActivity() {
 
     private fun showCancelConfirmationDialog() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_confirm_cancel, null)
-        val dialog = AlertDialog.Builder(this, R.style.BrandedAlertDialog)
+        val dialog = AlertDialog.Builder(this)
             .setView(dialogView)
             .create()
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val btnConfirmCancel = dialogView.findViewById<MaterialButton>(R.id.btnConfirmCancel)
         val btnKeepReport = dialogView.findViewById<MaterialButton>(R.id.btnKeepReport)

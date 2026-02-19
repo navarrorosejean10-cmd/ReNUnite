@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/windowBackground">
+    android:background="@drawable/bg_app">
 
     <!-- Header Section -->
     <ImageButton
@@ -18,7 +18,7 @@
         android:src="@drawable/ic_back_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="?attr/colorPrimary" />
+        app:tint="#4361B5" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Privacy Policy"
-        android:textColor="?attr/colorPrimary"
+        android:textColor="#4361B5"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
@@ -51,7 +51,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="?attr/colorSurface"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="1dp">
 
@@ -65,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Introduction"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -74,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="ReNUnite is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application."
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="#64748B"
                         android:textSize="14sp" />
 
                     <TextView
@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
                         android:text="Information We Collect"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="We collect personal information that you provide to us, such as your name, student ID, and email address when you create an account. We also collect information about lost and found items you report, including descriptions and photos."
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="#64748B"
                         android:textSize="14sp" />
 
                     <TextView
@@ -99,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
                         android:text="How We Use Your Information"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -108,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="Your information is used to facilitate the recovery of lost items within the NU Dasmariñas community. This includes matching lost reports with found reports and notifying users of potential matches."
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="#64748B"
                         android:textSize="14sp" />
 
                     <TextView
@@ -116,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
                         android:text="Data Security"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -125,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="We implement a variety of security measures to maintain the safety of your personal information. However, no method of transmission over the internet is 100% secure."
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="#64748B"
                         android:textSize="14sp" />
 
                     <TextView
@@ -133,7 +133,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
                         android:text="Changes to This Policy"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="#1E293B"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -142,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page."
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="#64748B"
                         android:textSize="14sp" />
 
                 </LinearLayout>

@@ -46,7 +46,7 @@
         android:layout_marginTop="8dp"
         android:fillViewport="true"
         android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreateAccount"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
         <LinearLayout
@@ -56,7 +56,7 @@
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
             android:paddingTop="16dp"
-            android:paddingBottom="24dp">
+            android:paddingBottom="48dp">
 
             <!-- Name Row -->
             <LinearLayout
@@ -78,19 +78,27 @@
                         android:textColor="#8A9ED5"
                         android:textSize="15sp" />
 
-                    <EditText
-                        android:id="@+id/etFirstName"
+                    <LinearLayout
+                        android:id="@+id/llFirstNameContainer"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/input_field_bg_rounded"
-                        android:hint="e.g. Juan"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
-                        android:textColor="#4A5BB2"
-                        android:textColorHint="#BCC8E5"
-                        android:textSize="15sp"
-                        android:textStyle="italic" />
+                        android:gravity="center_vertical">
+
+                        <EditText
+                            android:id="@+id/etFirstName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:hint="e.g. Juan"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp"
+                            android:textColor="#4A5BB2"
+                            android:textColorHint="#BCC8E5"
+                            android:textSize="15sp"
+                            android:textStyle="italic" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -107,19 +115,27 @@
                         android:textColor="#8A9ED5"
                         android:textSize="15sp" />
 
-                    <EditText
-                        android:id="@+id/etLastName"
+                    <LinearLayout
+                        android:id="@+id/llLastNameContainer"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/input_field_bg_rounded"
-                        android:hint="e.g. Dela Cruz"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
-                        android:textColor="#4A5BB2"
-                        android:textColorHint="#BCC8E5"
-                        android:textSize="15sp"
-                        android:textStyle="italic" />
+                        android:gravity="center_vertical">
+
+                        <EditText
+                            android:id="@+id/etLastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:hint="e.g. Dela Cruz"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp"
+                            android:textColor="#4A5BB2"
+                            android:textColorHint="#BCC8E5"
+                            android:textSize="15sp"
+                            android:textStyle="italic" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -132,19 +148,38 @@
                 android:textColor="#8A9ED5"
                 android:textSize="15sp" />
 
-            <EditText
-                android:id="@+id/etStudentId"
+            <LinearLayout
+                android:id="@+id/llStudentIdContainer"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/input_field_bg_rounded"
-                android:hint="XXXX-XXXXXX"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:textColor="#4A5BB2"
-                android:textColorHint="#BCC8E5"
-                android:textSize="15sp"
-                android:textStyle="italic" />
+                android:gravity="center_vertical">
+
+                <EditText
+                    android:id="@+id/etStudentId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:hint="XXXX-XXXXXX"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="#4A5BB2"
+                    android:textColorHint="#BCC8E5"
+                    android:textSize="15sp"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvStudentIdError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Invalid Student ID format (XXXX-XXXXXX)"
+                android:textColor="#FF5252"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:visibility="gone" />
 
             <!-- Department -->
             <TextView
@@ -156,7 +191,7 @@
                 android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilDepartment"
+                android:id="@+id/llDepartmentContainer"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,7 +209,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
-                    android:hint="Select department"/>
+                    android:hint="Select department"
+                    android:textColor="#4A5BB2"
+                    android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -188,7 +225,7 @@
                 android:textSize="15sp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilProgram"
+                android:id="@+id/llProgramContainer"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -206,7 +243,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
-                    android:hint="Select program"/>
+                    android:hint="Select program"
+                    android:textColor="#4A5BB2"
+                    android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -221,6 +260,7 @@
                 android:textSize="15sp" />
 
             <LinearLayout
+                android:id="@+id/llEmailContainer"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="8dp"
@@ -250,6 +290,17 @@
                     android:singleLine="true" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tvEmailError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Please use your official NU student email. Valid format: name@students.nu-dasma.edu.ph"
+                android:textColor="#FF5252"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:visibility="gone" />
+
             <!-- Password -->
             <TextView
                 android:layout_width="wrap_content"
@@ -260,6 +311,7 @@
                 android:textSize="15sp" />
 
             <LinearLayout
+                android:id="@+id/llPasswordContainer"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="8dp"
@@ -281,7 +333,7 @@
                     android:layout_marginStart="14dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:hint="e.g. ******"
+                    android:hint="******"
                     android:inputType="textPassword"
                     android:textColor="#4A5BB2"
                     android:textColorHint="#BCC8E5"
@@ -298,6 +350,55 @@
                     app:tint="#D0D9EF" />
             </LinearLayout>
 
+            <!-- Password Requirements Indicators -->
+            <LinearLayout
+                android:id="@+id/llRequirementsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvRequirementLength"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✕ 8 characters minimum"
+                    android:textColor="#FF5252"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/tvRequirementAlphabet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="✕ One alphabet letter"
+                    android:textColor="#FF5252"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/tvRequirementNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="✕ One number"
+                    android:textColor="#FF5252"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/tvRequirementSpecial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="✕ One special character"
+                    android:textColor="#FF5252"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
             <!-- Confirm Password -->
             <TextView
                 android:layout_width="wrap_content"
@@ -308,6 +409,7 @@
                 android:textSize="15sp" />
 
             <LinearLayout
+                android:id="@+id/llConfirmPasswordContainer"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="8dp"
@@ -329,7 +431,7 @@
                     android:layout_marginStart="14dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:hint="e.g. ******"
+                    android:hint="******"
                     android:inputType="textPassword"
                     android:textColor="#4A5BB2"
                     android:textColorHint="#BCC8E5"
@@ -345,6 +447,17 @@
                     android:focusable="true"
                     app:tint="#D0D9EF" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvRequirementMatch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="✕ Passwords Match"
+                android:textColor="#FF5252"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:visibility="gone" />
 
             <!-- Terms & Privacy -->
             <LinearLayout
@@ -374,25 +487,23 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
+            <!-- Bottom Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCreateAccount"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#6195FF"
+                android:text="Create Account"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:letterSpacing="0"
+                app:cornerRadius="32dp"
+                app:elevation="4dp" />
+
         </LinearLayout>
     </ScrollView>
-
-    <!-- Bottom Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnCreateAccount"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="#6195FF"
-        android:text="Create Account"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:cornerRadius="32dp"
-        app:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

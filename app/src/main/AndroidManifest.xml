@@ -16,9 +16,6 @@
             android:name="com.example.renunite.ResetPasswordActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.renunite.ForgotPasswordActivity"
-            android:exported="false" />
-        <activity
             android:name="com.example.renunite.PrivacyPolicyActivity"
             android:exported="false" />
         <activity
@@ -28,7 +25,7 @@
             android:name="com.example.renunite.AppSettingsActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.renunite.SecurityPasswordActivity"
+            android:name="com.example.renunite.AccountSettingsActivity"
             android:exported="false" />
         <activity
             android:name="com.example.renunite.MyReportDetailsActivity"

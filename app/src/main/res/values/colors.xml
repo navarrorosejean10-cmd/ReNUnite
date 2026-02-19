@@ -14,6 +14,7 @@
     <color name="brand_blue">#4361B5</color>
     <color name="brand_blue_dark">#324A8A</color>
     <color name="brand_blue_accent">#6A9EF8</color>
+    <color name="brand_error">#FF5252</color>
     <color name="background_light">#F8FAFF</color>
     <color name="background_dark">#212121</color>
     <color name="surface_dark">#333333</color>
